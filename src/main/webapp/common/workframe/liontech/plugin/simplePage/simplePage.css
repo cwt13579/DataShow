@@ -1,0 +1,12 @@
+/**
+ * 创建于:2014-5-21<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 简单页面插件对应的css
+ * @author chender
+ * @version 1.0.0
+ */
+.lt_simplePage_toolbar_button{
+	position: absolute;
+	float:left;
+	margin: 5px;
+}

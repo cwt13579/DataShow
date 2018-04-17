@@ -1,0 +1,28 @@
+/**
+ * 创建于:2014-5-21<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 数据表格控件对应的css文件
+ * @author chender
+ * @version 1.0.0
+ */
+.lt_dataTable_altCss {
+    background-color: #f3f9fb;
+}
+
+/**
+.ui-state-highlight td 
+	{
+	border: 0px solid #fad42e;
+	background: #aaaaaa;
+	color: #363636;
+}
+*/
+
+.ui-pg-input{
+	min-height: 13px;
+}
+
+.jqgrow>td{
+	/*white-space: pre-wrap !important;*/
+	word-break: break-all !important;
+}

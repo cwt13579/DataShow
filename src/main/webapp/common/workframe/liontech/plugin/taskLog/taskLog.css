@@ -1,0 +1,47 @@
+/**
+ * 创建于:2014-8-19<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 任务日志插件对应的css
+ * @author chender
+ * @version 1.0.0
+ */
+ 
+.taskNodeRoot{
+	cursor: pointer;
+	display: block;
+	background-image: url("data:image/gif; base64,AAAA");
+}
+
+.nodeName{
+	position:absolute;
+}
+
+.taskNumber{
+	font-size: 17px;
+	margin-left: 3px;
+}
+.taskNumber > div{
+	float:left
+}
+
+.ui-pg-input{
+	min-height: 18px;
+}
+
+.leftOper{
+	height:100%;
+	position: fixed;
+	width:80px;
+	right:0px;
+	z-index: 999;
+}
+
+.changeFlow{
+	position:absolute;
+	top:20px;
+	left:10px;
+	width:60px;
+	height:60px;
+	cursor: pointer;
+}
+ 

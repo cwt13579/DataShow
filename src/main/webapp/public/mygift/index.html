@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>我的奖品</title>
+		<link rel="stylesheet" href="css/mygift.css" />
+		<script type="text/javascript" src="../../common/js/BerUtil.js"></script>
+	</head>
+
+	<body>
+		<div id="giftRoot" style="display:none;">
+			<div class="item #{type}" gift-id="#{giftId}" bind-code="#{bindCode}">
+				<div class="top">
+					<div class="pic">
+						<img src="#{cover}" />
+					</div>
+					<div class="middle">
+						<div class="name">#{name}</div>
+						<div class="top-spliter"></div>
+						<div class="time">中奖时间：#{luckyTime}</div>
+						<div class="coupon-info" bind-data="showInfo">
+							<div>使用条件：#{limit}</div>
+							<div class="one-line">使用店铺：#{shopNames}</div>
+							<div>使用时间：#{startTime}至#{endTime}</div>
+						</div>
+					</div>
+					<div rid="#{recordId}" class="status color_#{sendStyle} #{editAddress}">#{sendStatus}</div>
+					<div style="clear:both"></div>
+				</div>
+				<div class="middle-spliter"></div>
+				<div class="bottom">
+					<div>收货地址：</div>
+					<div class="address">#{address}</div>
+				</div>
+			</div>
+		</div>
+		<div id="addressRoot">
+			<div class="address-title">请填写你的奖品邮寄地址</div>
+			<div class="address-item">
+				<div class="address-label">收货姓名：
+					<div class="input-wrap">
+						<input type="text" id="receiveName" maxlength="8"/>
+					</div>
+				</div>
+			</div>
+			<div class="address-item">
+				<div class="address-label">收货地址：
+					<div class="input-wrap">
+						<input type="text" id="address" maxlength="64"/>
+					</div>
+				</div>
+			</div>
+			<div class="address-item">
+				<div class="address-label">联系电话：
+					<div class="input-wrap">
+						<input type="text" id="cellphone" maxlength="16"/>
+					</div>
+				</div>
+			</div>
+			<div class="save-button">保存</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var curPage = 1,
+			recordPerPage = 10;
+		var giftHtml = giftRoot.innerHTML;
+		var activityId=BU.getUrlParam("activityId");
+		queryData();
+		bindEvent();
+
+		function queryData(cb) {
+			BU.get(BU.getAbsPath("modules/public/gift/mine"), {
+				curPage: curPage,
+				recordPerPage: recordPerPage,
+				activityId:activityId
+			}, function(data) {
+				for(var i in data) {
+					var d = data[i];
+					if(d.showInfo) {
+						d.showInfo = [JSON.parse(d.showInfo)];
+					}
+					if(!d.sendStatus) {
+						d.sendStatus = d.sendStatus || "编辑地址";
+						d.editAddress = "editAddress";
+					} else {
+						d.editAddress = "";
+					}
+					d.limit="满"+d.limit+"可使用";
+					if(d.type=="material"&&d.getWay==1){
+						d.type="coupon";//自提的实物走优惠券的流程
+						d.limit="到店自提";
+						d.startTime=d.luckyTime;
+						d.endTime=BU.dateFormat(new Date(d.startTime+d.showInfo[0].inDay*24*3600000),"yyyy-MM-dd");
+						d.startTime=BU.dateFormat(new Date(d.startTime),"yyyy-MM-dd");
+					}
+					d.address = d.address || "你还未设置收获地址哦~";
+					d.luckyTime = BU.parseTime(d.luckyTime);
+				}
+				if(curPage == 1) {
+					giftRoot.innerHTML = BU.bindData(giftHtml, data);
+					giftRoot.style.display = "block";
+				} else {
+					giftRoot.innerHTML += BU.bindData(giftHtml, data);
+				}
+				cb && cb(data.length >= recordPerPage);
+			});
+		}
+
+		function bindEvent() {
+			BU.bindScroll({
+				bottom: function(cb) {
+					curPage++;
+					queryData(function(flag) {
+						flag && cb();
+					});
+				}
+			});
+			var curRid=null;
+			bu("#giftRoot").on("tap", "editAddress", function() {
+				addressRoot.style.display = "block";
+				giftRoot.style.display="none";
+				curRid=this.getAttribute("rid");
+				receiveName.value="";
+				address.value="";
+				cellphone.value="";
+			});
+			bu("#addressRoot").on("tap", "save-button", function() {
+				var rn=receiveName.value;
+				var addr=address.value;
+				var phone=cellphone.value;
+				if(!rn||!addr||!phone){
+					BU.alert("输入不完整~");
+				}else{
+					var param={receiveName:rn,address:addr,cellphone:phone,recordId:curRid};
+					BU.post(BU.getAbsPath("modules/public/gift/address"),param,function(r){
+						if(r=="success"){
+							queryData();
+							addressRoot.style.display = "none";
+							giftRoot.style.display="block";
+						}else{
+							BU.alert(r);
+						}
+					},function(errCode,errMsg){
+						BU.alert(errMsg);
+					});
+					
+				}
+			});
+			bu("#giftRoot").on("tap", "coupon", function() {
+				var giftId=this.getAttribute("gift-id");
+				var bindCode=this.getAttribute("bind-code");
+				location.href="../coupon/index.html?giftId="+giftId+"&bindCode="+bindCode;
+			});
+		}
+	</script>
+
+</html>

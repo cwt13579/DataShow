@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<script type="text/javascript" src="js/GGL.js" ></script>
+		<style>
+			#gglRoot{
+				width:200px;
+				height:100px;
+				position: absolute;
+				left:50%;
+				margin-left:-100px;
+				top:200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="gglRoot">
+		</div>
+	</body>
+	<script>
+		new GGL(gglRoot,'r/ggl.png','一等奖',function(){
+			alert("初始化完毕");
+		},function(){
+			alert('刮开了')
+		});
+	</script>
+</html>

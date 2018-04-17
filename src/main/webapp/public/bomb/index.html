@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="css/dzd.css" />
+		<script type="text/javascript" src="js/Context.js"></script>
+		<script type="text/javascript" src="js/ImgItem.js"></script>
+		<script type="text/javascript" src="js/Hand.js"></script>
+		<script type="text/javascript" src="js/BackGround.js"></script>
+		<script type="text/javascript" src="js/DropItem.js"></script>
+		<script type="text/javascript" src="js/Gift.js"></script>
+		<script type="text/javascript" src="js/Boom.js"></script>
+		<script type="text/javascript" src="js/scoreBoard.js"></script>
+		<script type="text/javascript" src="js/DropManager.js"></script>
+		<script type="text/javascript" src="js/resource.js"></script>
+		<script type="text/javascript" src="js/dzd.js"></script>
+		<script type="text/javascript" src="../../common/js/BerUtil.js"></script>
+		<script type="text/javascript" src="js/ActivitySupport.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+		<div id="gameRoot">
+			<canvas class="canvas" id="gameScreen"></canvas>
+			<div id="welcom" class="welcom">
+				<div class="pic">
+					<img class="pic_top" src="r/topic.png" />
+					<img class="pic_middle" src="r/help_word.png" />
+					<img class="pic_bottom" src="r/help_oper.png" />
+				</div>
+				<div class="oper">
+					<div class="time-tip"></div>
+					<div class="startGame">
+						<img src="r/startGame.png">
+					</div>
+					<div class="action">
+						<a class="action-desc">活动介绍&gt;</a>
+						<a class="action-winners">看看谁中了奖？</a>
+					</div>
+				</div>
+			</div>
+			<div id="memo">
+				<div class="memo-title-wrap">
+					<img class="memo-title" src="r/memo_title.png" />
+				</div>
+				<img class="memo-bg" src="r/memo_bg.png" />
+				<img class="memo-close closeAction" src="r/memo_close.png" />
+				<div id="memoContent"></div>
+			</div>
+			<div class="pop-root" id="winners">
+				<img class="pop-bg" src="r/winners_bg.png" />
+				<div class="pop-text-wrap">
+					<img class="pop-text" src="r/winners_ask.png" />
+				</div>
+				<div class="winners-content">
+					<img class="winners-list-bg" src="r/winners_list_bg.png" />
+					<img class="winners-close closeAction" src="r/memo_close.png" />
+					<div id="winnersList" class="winners-list">
+						<div class="list-row">
+							<div class="list-col">#{userName}</div>
+							<div class="list-col">#{giftName}</div>
+							<div class="list-col">#{luckyTime}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pop-root" id="showLuckyDom">
+				<img class="pop-bg" src="r/winners_bg.png" />
+				<div class="pop-text-wrap">
+					<img id="greatDom" class="pop-text" src="r/great.png" />
+				</div>
+				<div class="result-desc" id="resultDesc">
+					<div>你在
+						<font color='#FD5300'>#{time}</font>秒内抢到了
+						<font color='#FD5300'>#{point}个礼物</font>
+					</div>
+					<!--<div>超过了
+						<font color='#FD5300'>#{percent}%</font>的用户</div>-->
+					<div class="getOneChance">获得了一次抽奖机会</div>
+				</div>
+				<div id="giftResult" class="gift-result-text">什么都没有抽到</div>
+				<div id="giftRoot">
+					<div class="gift-content">
+						<img class="gift-bg" src="r/gift_bg.png" />
+						<div class="result-gift-wrap">
+							<img id="resultGift" class="result-gift" src="r/result_gift.png" />
+						</div>
+						<div class="result-more">
+							<div id="couponInfo" class="gift-wrap">
+								<img src="r/coupon_bg.png" />
+								<div class="coupon-info">
+									<div class="left">
+										<font class="small">￥</font>#{amount}</div>
+									<div class="right">
+										<div class="top">优惠券</div>
+										<div class="down">#{limitDesc}</div>
+									</div>
+								</div>
+							</div>
+							<div id="redpacketInfo" class="gift-wrap">
+								<img class="redpacket" src="r/redpacket.png" />
+								<div class="rp-amount">#{amount}
+									<font class="small">元</font>
+								</div>
+							</div>
+							<div id="materialInfo" class="gift-wrap">
+								<img class="material" src="#{cover}" />
+							</div>
+						</div>
+						<div id="leftDesc" class="left-desc"></div>
+						<div class="gift-down">
+							<img class="button actionAquire" src="r/confirm_button.png" />
+							<img id="openGift" class="button actionAquire" src="r/open_gift.png" />
+						</div>
+					</div>
+					<div class="oper-button-root">
+						<div class="item my-gift">
+							<div class="button-name">我的奖品</div>
+							<img src="r/button_mygift.png" />
+						</div>
+						<div class="item show-winners">
+							<div class="button-name">看看谁中奖了</div>
+							<img src="r/button_winners.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mask" class="closeAction"></div>
+	</body>
+	<script type="text/javascript">
+		gameRoot.style.display="none";
+		BUSER.checkLogin(doInit,'default');
+		function doInit(){
+			gameRoot.style.display="block";
+		}
+		var ACT = new Activity(BU.getUrlParam("id"));
+		var winnersTmp = winnersList.innerHTML;
+		var resultTmp = resultDesc.innerHTML;
+		var activity = null;
+		getActivity(function(r) { //该方法是同步的
+			activity = r;
+			if(activity == null) {
+				error("未获取到活动信息");
+			}
+		}, error);
+		memoContent.innerHTML = activity.memo;
+		var showLuckyHtml = showLuckyDom.innerHTML;
+		var couponInfoHtml = couponInfo.innerHTML;
+		var redpacketInfoHtml = redpacketInfo.innerHTML;
+		var materialInfoHtml = materialInfo.innerHTML;
+		var dzd = new DZD(gameRoot, gameScreen, inited, function(point, time) {
+			dzd.reset();
+			if(point >= activity.threshold) {
+				aquired = false;
+				showLuckyDom.innerHTML = showLuckyHtml;
+				showLuckyDom.setAttribute("class", "pop-root");
+				showLucky(point, time);
+				refreshLeftLucky();
+			}else{
+				showLuckyDom.innerHTML = showLuckyHtml;
+				showLuckyDom.setAttribute("class", "pop-root");
+				showLuckyDom.classList.add("no-gift");
+				resultGift.setAttribute("src", "r/gift_no.png");
+				greatDom.setAttribute("src", "r/so_sorry.png");
+				showLuckyDom.style.display = "block";
+				giftResult.innerHTML=BU.bindData(resultTmp,{time:parseInt(time/1000),point:point})
+				giftResult.querySelector(".getOneChance").innerText="继续加油哦"
+				showPlayAgain();
+			}
+		});
+
+		function inited() {
+			bindEvent();
+		}
+		var aquired = false;
+
+		function bindEvent() {
+			bindBySelector("startGame", function() {
+				dzd.start();
+				document.querySelector(".welcom").style.display = "none";
+			});
+			bindBySelector("action-desc", function() {
+				mask.style.display = "block";
+				memo.style.display = "block";
+			});
+			bindBySelector("action-winners", function() {
+				mask.style.display = "block";
+				winners.style.display = "block";
+				welcom.style.display = "none";
+				getWinners(function(data) {
+					for(var i in data){
+						data[i].luckyTime=BU.dateFormat(new Date(data[i].luckyTime),"yyyy-MM-dd");
+						data[i].userName=data[i].userName||"幸运用户";
+					}
+					winnersList.innerHTML = BU.bindData(winnersTmp, data);
+					winnersList.style.display = "block";
+				});
+			});
+			bindBySelector("closeAction", function() {
+				if(mask.style.display == "block") {
+					mask.style.display = "none";
+					welcom.style.display = "block";
+					memo.style.display = "none";
+				} else {
+					showLuckyDom.style.display = "block";
+				}
+				winners.style.display = "none";
+			});
+			bindBySelector("actionAquire", function() {
+				if(aquired) { //再玩一次
+					playAgain();
+				} else {
+					aquireGift();
+				}
+			});
+			bindBySelector("my-gift", function() {
+				location.href="../mygift/index.html?activityId="+BU.getUrlParam("id");
+			});
+			bindBySelector("show-winners", function() {
+				winners.style.display = "block";
+				showLuckyDom.style.display = "none";
+				getWinners(function(data) {
+					for(var i in data){
+						data[i].luckyTime=BU.dateFormat(new Date(data[i].luckyTime),"yyyy-MM-dd");
+						data[i].userName=data[i].userName||"幸运用户";
+					}
+					winnersList.innerHTML = BU.bindData(winnersTmp, data);
+					winnersList.style.display = "block";
+				});
+			});
+		}
+
+		function showLucky(point, time) {
+			getResultData(function(data) {
+				data.point = point;
+				data.time = parseInt(time / 1000);
+				resultDesc.innerHTML = BU.bindData(resultTmp, data);
+				showLuckyDom.style.display = "block";
+			});
+		}
+
+		function bindBySelector(selector, cb) {
+			bu("body").on("tap", selector, cb);
+		}
+
+		function getActivity(cb) {
+			return ACT.info(cb);
+		}
+
+		function getWinners(cb) {
+			ACT.winners(cb,error);
+		}
+
+		function getResultData(cb) {
+			cb({
+				percent: 88
+			});
+		}
+
+		function aquireGift() {
+			var gift;
+			ACT.aquireLucky(function(r) {
+				if(r == "no-chance") {
+					error("你的抽奖次数已用完");
+					return;
+				} else if(r == "empty") { //未中奖
+				} else {
+					gift = r;
+				}
+				if(gift == null) {
+					showLuckyDom.classList.add("no-gift");
+					resultGift.setAttribute("src", "r/gift_no.png");
+					greatDom.setAttribute("src", "r/so_sorry.png");
+				} else {
+					if(gift.useLimit) {
+						gift.limitDesc = "满" + gift.useLimit + "可使用";
+					} else {
+						gift.limitDesc = "无使用门槛";
+					}
+					if(true){//TODO 展示风格一致?
+						materialInfo.innerHTML = BU.bindData(materialInfoHtml, gift);
+						couponInfo.style.display = "none";
+						redpacketInfo.style.display = "none";
+						materialInfo.style.display = "block";
+					}else if(gift.type == "coupon") {
+						couponInfo.innerHTML = BU.bindData(couponInfoHtml, gift);
+						couponInfo.style.display = "block";
+						redpacketInfo.style.display = "none";
+						materialInfo.style.display = "none";
+					} else if(gift.type == "redPacket") {
+						redpacketInfo.innerHTML = BU.bindData(redpacketInfoHtml, gift);
+						couponInfo.style.display = "none";
+						redpacketInfo.style.display = "block";
+						materialInfo.style.display = "none";
+					} else if(gift.type == "material") {
+						materialInfo.innerHTML = BU.bindData(materialInfoHtml, gift);
+						couponInfo.style.display = "none";
+						redpacketInfo.style.display = "none";
+						materialInfo.style.display = "block";
+					}else{
+						couponInfo.style.display = "none";
+						redpacketInfo.style.display = "none";
+						materialInfo.style.display = "none";
+					}
+					showLuckyDom.classList.add("has-gift");
+					greatDom.setAttribute("src", "r/congratulate.png");
+					giftResult.innerText = '获得了"' + gift.giftName + '"';
+					setTimeout(function(){
+						if(gift.userType=="userType_wx"){
+							var b=window.confirm("是否马上登录一户通进行奖品绑定");
+							b&&BUSER.goLogin();
+						}
+					},600);
+				}
+				refreshLeftLucky();
+				showPlayAgain();
+			});
+		}
+		
+		function showPlayAgain(){
+			document.querySelector(".gift-down").classList.add("play-again");
+			openGift.setAttribute("src", "r/play_again.png");
+			aquired = true;
+		}
+
+		function playAgain() {
+			showLuckyDom.style.display = "none";
+			dzd.start();
+		}
+
+		function refreshLeftLucky() {
+			ACT.leftLucky(function(r) {
+				var leftDesc = document.getElementById("leftDesc");
+				if(r[0] == "day") {
+					if(r[1]>0){
+						leftDesc.innerHTML = "你今天还有<font class='left-font'>" + r[1] + "</font>次抽奖机会";
+					}else{
+						leftDesc.innerHTML="今日抽奖机会已用完";
+						showLuckyDom.querySelector(".getOneChance").innerText="真厉害~";
+						showPlayAgain();
+					}
+				} else if(r[0] == "total") {
+					if(r[1]>0){
+						leftDesc.innerHTML = "你还有<font class='left-font'>" + r[1] + "</font>次抽奖机会";
+					}else{
+						leftDesc.innerHTML="你的抽奖机会已用完";
+						showLuckyDom.querySelector(".getOneChance").innerText="真厉害~";
+						showPlayAgain();
+					}
+				} else {
+					leftDesc.innerHTML = "";
+				}
+			});
+		}
+
+		function error(msg) {
+			alert(msg);
+		}
+	</script>
+
+</html>

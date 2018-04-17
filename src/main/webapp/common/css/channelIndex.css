@@ -1,0 +1,226 @@
+
+@font-face {
+    font-family: 'lighcond';
+    src: url('../font/AKZIDENZGROTESK-LIGHTCOND.eot');
+    src: local('fontName lighcond'),
+    local('fontName'),
+    url('../font/AKZIDENZGROTESK-LIGHTCOND.woff') format('woff'),
+    url('../font/AKZIDENZGROTESK-LIGHTCOND.ttf') format('truetype'),
+    url('../font/AKZIDENZGROTESK-LIGHTCOND.svg#fontName') format('svg');
+}
+.main-Boxbody{
+    padding: 0 20px;
+}
+.main-title{
+    color: #4d4d4d;
+}
+.main-title-p{
+    color: #909090;
+}
+.bg-mainBox ul,.bg-mainBox ul li,.infoList ul{
+    margin: 0;
+    padding: 0;
+}
+.bg-mainBox ul li{
+    list-style: none;
+    float: left;
+    margin-left: 20px;
+}
+.bg-mainBox ul li:first-of-type{
+    margin-left: 0;
+}
+.main-box{
+    padding: 5px;
+}
+.main-box .main-div{
+    border: 1px dashed #ffffff;
+    width: 120px;
+    height: 100px;
+    color: #ffffff;
+    padding: 13px;
+}
+.main-box .main-div .num{
+    font-family: 'lighcond';
+    font-size: 38px;
+    font-weight: bold;
+}
+.main-box-activeting{
+    background: #e3cb7d;
+}
+.main-box-advert{
+    background: #90d8e6;
+}
+.main-box-adverting{
+    background: #d7b7e5;
+}
+.main-box-info{
+    background:#ff968f ;
+}
+.main-box-card{
+    background: #97c7f7;
+}
+.infoList{
+    height: 155px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    background: #ffffff;
+}
+.show-noData{
+    line-height: 155px;
+    display: none;
+    color: #cccccc;
+    text-align: center;
+}
+.infoList ul li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+.infoList ul li .text{
+    padding: 5px 20px;
+    color: #757575;
+}
+.infoList ul li:nth-child(2n){
+    background: #ffffff;
+}
+.infoList ul li:nth-child(2n-1){
+    background: #f3f9fb;
+}
+.link-text{
+    color: #44B6Ef;
+    text-decoration: underline;
+    max-width: 130px;
+    overflow: hidden;
+    display: inline-block;
+    height: 15px;
+    position: relative;
+    top: 2px;
+    white-space: nowrap;
+    text-transform: inherit;
+    text-overflow: ellipsis;
+}
+.home-title.border-bottom{
+    border-bottom: 1px solid #F0F0F0;
+}
+.data-title{
+    color: #a5a5a5;
+    padding-top: 16px;
+    padding-left: 20px;
+}
+.data-circle .panel-body{
+    height: 312px;
+}
+.small-input{
+    display: inline-flex;
+    width: 120px;
+}
+.small-box{
+    display: inline-block;
+    width: 120px;
+}
+.big-box{
+    display: inline-block;
+    width: 120px;
+}
+label.count-label{
+    position: relative;
+    top: -3px;
+    color: #848484;
+    font-weight: normal;
+    margin-left: 15px;
+}
+.count-title {
+    padding: 20px 15px;
+    background: #fff;
+}
+.countBox{
+    border: 1px solid #F0F0F0;
+    margin-top: 20px;
+    padding: 0 20px;
+    background: #fff;
+}
+.dataBox{
+    position: relative;
+    min-height: 100px;
+
+}
+.select-time {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+.count-title .count-titleText{
+    color: #626262;
+    font-size: 16px;
+    font-weight: bold
+}
+.count-title .count-titleText .num{
+    font-size: 40px;
+    font-family: lighcond;
+    color: #45c1e5;
+    padding-left: 10px;
+}
+span.count-line {
+    padding: 5px;
+    position: relative;
+    display: inline-block;
+}
+span.count-line .count-line0 {
+     width: 25px;
+     height: 2px;
+     background: #d7b7e5;
+     display: inline-block;
+     margin-right: 4px;
+     margin-bottom: 3px;
+ }
+span.count-line .count-line1 {
+    width: 25px;
+    height: 2px;
+    background: #7dd2e3;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: 3px;
+}
+span.count-line .count-line2 {
+    width: 25px;
+    height: 2px;
+    background: #abdaac;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: 3px;
+}
+span.count-line .count-line3 {
+    width: 25px;
+    height: 2px;
+    background: #5ec6f9;
+    display: inline-block;
+    margin-right: 4px;
+    margin-bottom: 3px;
+}
+#couponData_line {
+    margin-bottom: 25px;
+}
+
+.time-titleText {
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 1300px){
+    #mainBox .main-box .main-div{
+        line-height: 100px;
+    }
+    #mainBox .main-box .main-div h2{
+        display: inline-block;
+        margin-left: 15px;
+        font-size: 55px;
+    }
+    #mainBox .main-box .main-div h5{
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+}

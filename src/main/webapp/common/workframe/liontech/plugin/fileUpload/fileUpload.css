@@ -1,0 +1,35 @@
+/**
+ * 创建于:2014-6-24<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 文件上传服务对应的css
+ * @author chender
+ * @version 1.0.0
+ */
+.lt-upload-item {
+	width: 72px;
+	height:72px;
+	margin-left:5px;
+	margin-top:5px;
+	float:left;
+	position: relative;
+}
+
+.lt-upload-image {
+	width: 56px;
+	height:56px;
+	margin-top:2px;
+	margin-left:8px;
+	border-radius:4px;
+}
+
+
+.lt-upload-item:hover {
+	background-color: #cccccc;
+}
+
+.lt-upload-desc {
+	text-align: center;
+	height: 14px;
+	width:100%;
+	color: blue;
+}

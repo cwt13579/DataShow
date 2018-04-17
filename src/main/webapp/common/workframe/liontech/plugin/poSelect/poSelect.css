@@ -1,0 +1,137 @@
+/**
+ * 创建于:2014-8-12<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 机构人员选择插件对应的css
+ * @author chender
+ * @version 1.0.0
+ */
+.poSelect_selecting {
+	width: 100%;
+	height: 100%;
+}
+
+.poSelect_left {
+	position: absolute;
+	width: 240px;
+	top: 2px; left : 2px;
+	bottom: 3px;
+	border-radius: 5px;
+	left: 2px;
+}
+
+.poSelect_left>ul {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.poSelect_right {
+	position: absolute;
+	top: 2px;
+	left: 255px;
+	right: 2px;
+	bottom: 3px;
+	border-radius: 5px;
+}
+.poSelected_sp{
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+.poSelected_sp_form{
+	position: absolute;
+	left:1px;
+	right:145px;
+	top:2px;
+	height:83px;
+}
+.poSelected_sp_oper{
+	position: absolute;
+	right:1px;
+	top:2px;
+	width:141px;
+	height:83px;
+}
+.poSelected_sp_table{
+	position: absolute;
+	left:0px;
+	right:0px;
+	top:90px;
+	bottom:2px;
+}
+
+
+.ztree li a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 90%;
+}
+
+.poSelect_selected {
+	width:100%;
+	height:100%;
+	display: none;
+}
+
+.poSelect_selectedPeopleList{
+	position: absolute;
+	top:0px;
+	bottom:57px;
+	left:0px;
+	right:0px;
+	overflow: auto;
+}
+
+.poSelect_selectedOper{
+	position: absolute;
+	left:0px;
+	right:0px;
+	bottom:2px;
+	height:50px;
+	padding-right:5px;
+	border-radius:5px;
+}
+
+.poSelect_operItem{
+	position:relative;
+	cursor: pointer;
+	height:46px;
+	width:46px;
+	float:right;
+}
+.poSelect_operItem>img{
+	position: absolute;
+	left:2px;
+	top:2px;
+	width:42px;
+	height:42px;
+}
+
+.poSelect_peopleItem{
+	position:relative;
+	width:140px;
+	height:50px;
+	float:left;
+	margin-left:5px;
+	margin-top:5px;
+	border-radius:5px;
+	cursor:pointer;
+}
+.poSelect_peopleItem_nameCode{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.poSelect_peopleItem_orgName{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.poSelect_peopleItem_del{
+	position: absolute;
+	right:3px;
+	bottom:3px;
+}

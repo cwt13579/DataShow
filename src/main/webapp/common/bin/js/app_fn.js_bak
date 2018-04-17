@@ -1,0 +1,81 @@
+(function($) {
+	// 页面单选框构建
+	$.fn.ui_select = function(options, callback) {
+		var options = $.extend({}, $.fn.ui_select.defaults, options);
+		this.each(function() {
+			$(this).append(build($(this), options.schema,options.selectedValue,options.needDefault, options.defaultLabel, callback));
+		});
+	};
+
+	function build(selectRoot, schema, selectedValue, needDefault, defaultLabel, callback) {
+		var select = selectRoot;
+
+		switch(schema) {
+			case "DataStatus":
+				var invokeUri = path + "/enum/dataStatusInvoke";
+				nestedBuild(invokeUri, select, selectedValue, needDefault, defaultLabel, callback);
+			  break;
+			case "HostType":
+				var invokeUri = path + "/enum/hostTypeInvoke";
+				nestedBuild(invokeUri, select, selectedValue, needDefault, defaultLabel, callback);
+			  break;
+			case "DeviceType":
+				var invokeUri = path + "/enum/deviceTypeInvoke";
+				nestedBuild(invokeUri, select, selectedValue, needDefault, defaultLabel, callback);
+			  break;
+			case "PointType":
+				var invokeUri = path + "/enum/pointTypeInvoke";
+				nestedBuild(invokeUri, select, selectedValue, needDefault, defaultLabel, callback);
+			  break;
+			case "HostGroup":
+				var invokeUri = path + "/res/host/hostGroupsInvoke";
+				nestedBuild(invokeUri, select, selectedValue, needDefault, defaultLabel, callback);
+			  break;
+			default:
+				alert("指定的Schema：" + schema + "无效");
+		}
+
+		return select;
+	}
+
+	function nestedBuild(uri, select, selectedValue, needDefault, defaultLabel, callback) {
+		$.ajax({
+			url: uri,
+			method:"post",
+			success: function(data){
+				if(needDefault) {
+					var option = $('<option value=\'\'>' + defaultLabel + '</option>');
+					select.append(option);
+				}
+
+				$.each(data, function(i,status){
+          var option = $('<option value=' + status.value + '>' + status.note + '</option>');
+
+          if(status.value == selectedValue) {
+          	option.attr("selected", "selected");
+          }
+
+          select.append(option);
+				});
+
+				if(callback) {
+					//TODO 这里为了延时，只采用了这方法，实际上这里应采用回调函数控制执行顺序
+					setTimeout(function(){
+						callback();
+					}, 200);
+				}
+	    },
+	    error:function(){
+	    	alert(uri + "生成的列表构建失败");
+			}
+    });
+	}
+
+	$.fn.ui_select.defaults = {
+		schema : "",
+		selectedValue : "",
+		needDefault : true,
+		defaultLabel : "请选择"
+	};
+
+})(jQuery);

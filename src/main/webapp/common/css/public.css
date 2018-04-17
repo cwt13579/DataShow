@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*reset css*/
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption, footer, header, menu, nav, output, ruby, section, summary,time, mark, audio, video{margin: 0;padding: 0;border: 0;font: inherit;vertical-align: baseline;}
+body{font-size: 14px;font-family:"Microsoft YaHei", 微软雅黑, Arial, Helvetica, sans-serif;color:#666;width: 100%; background: white;}
+ol, ul {list-style-type: none;}
+blockquote,q {quotes: none;}
+a{text-decoration: none; color: #666; outline: none; cursor: pointer;}
+blockquote:before, blockquote:after,q:before, q:after {content: '';}
+img{max-width: 100%; border: none;    vertical-align: middle;}
+table {border-collapse: collapse;border-spacing: 0;}
+input,button{padding:0;}
+th{font-weight: normal;}
+textarea,input,button{resize: none; outline: none;font-family:"Microsoft YaHei", 微软雅黑, Arial, Helvetica, sans-serif;vertical-align: middle;}
+::-webkit-input-placeholder { color: #ccc; font-size:100%;}
+i{display: inline-block;vertical-align: middle;}
+
+.fl{float:left;}
+.fr{float:right;}
+.cl{clear:both;}
+.none{display:none;}
+.inlineblock{display:inline-block;}
+.block{display:block;}
+.ellipsis{white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
+.text-center{text-align: center;}
+.floatBox:after{ content: ''; display: block; width: 100%; height: 1px; clear: both;}

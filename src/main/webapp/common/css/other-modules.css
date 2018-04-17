@@ -1,0 +1,37 @@
+.classify-item{
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    color: #424242;
+    font-weight: bold;
+}
+.label-text{
+    margin-top: 10px;
+}
+.bold{
+    font-weight: bold;
+}
+.data-condition{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+#ul-step li{
+    padding: 5px 0;
+}
+#ul-step li select{
+    margin: 0 15px;
+}
+#ul-step li a{
+    color: #666666;
+    cursor: pointer;
+    margin-left: 20px;
+}
+#ul-step li a:hover{
+    text-decoration: underline;
+}
+.explainText{
+    border: 1px dashed #f3ce85;
+    padding: 5px;
+    margin: 5px 0;
+}

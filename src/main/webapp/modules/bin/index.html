@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/common/loading/css/showLoading.css">
+  </head>
+  <body>
+  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+        <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>首页</a>
+    </div>
+    <div class="navbar-header">
+        <a href="/getConsumerList" class="navbar-brand"><span class="glyphicon glyphicon-shopping-cart"></span>消费记录</a>
+    </div>
+    <div class="navbar-header">
+        <a href="/getLibInOutList" class="navbar-brand"><span class="glyphicon glyphicon-log-in"></span> 图书馆访问记录</a>
+    </div>
+     <div class="navbar-header  navbar-right">
+        <a href="/login/logout" class="navbar-brand"><span class="glyphicon"></span> 退出</a>
+    </div>
+  </div>
+</div>
+ <div class="container-fluid">
+	   <div class="row page-header">
+			<div class="col-xs-3">
+				<h4><span class="glyphicon glyphicon-th"></span>首页</h4>
+			</div>
+		</div>
+		<div class="row">
+		     <div class="panel panel-default">
+		         <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> 图书馆进出top10</div>
+					  <div class="panel-body" id="echart_lib_io_top10_panel">
+		                      <div id="echart_lib_io_top10" style="height: 250px;"></div>
+		              </div>
+		     </div>
+		</div>
+		<div class="row">
+		     <div class="panel panel-default">
+		         <div class="panel-heading"><span class="glyphicon glyphicon-th-list"></span> 消费流水统计</div>
+					  <div class="panel-body" id="echart_lib_dept_io_top10_panel">
+		                      <div id="echart_lib_dept_io_top10" style="height: 250px;"></div>
+		              </div>
+		     </div>
+		</div>
+  </div>
+</body>
+  <script src="/common/js/jquery-1.10.2.min.js"></script>
+  <script src="/common/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/common/chart/echarts-plain.js"></script>
+  <script src="/common/loading/js/jquery.showLoading.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+	  getLibIOTop10Data();
+	  //init_echart_lib_dept_io_top10();
+  });
+  function getLibIOTop10Data() {
+	  $("#echart_lib_io_top10_panel").showLoading();
+	  $.ajax({
+			url: "/getLibInOutTop10Data",
+			method:"post",
+			data:{},
+			dataType: "json",
+			beforeSend : function() {
+				 
+			},
+			success: function(data){
+				var cards = data.cards;
+				var counts = data.counts;
+				init_echart_lib_io_top10(cards,counts);
+				 $("#echart_lib_io_top10_panel").hideLoading();
+			},
+			error: function(){
+				console.log("error");
+			 }
+		  });
+  }
+  function init_echart_lib_io_top10(cards,counts) {
+	  
+	  option = {
+			    title : {
+			        text: '图书馆进出top10',
+			        subtext: '数据来源：积石堂'
+			    },
+			    tooltip : {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			        data:['进出数']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            mark : {show: true},
+			            dataView : {show: true, readOnly: false},
+			            magicType : {show: true, type: ['line', 'bar']},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : cards
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'进出数',
+			            type:'bar',
+			            data:counts
+			        } 
+			    ]
+			};
+	  echart_lib_top10 = echarts.init(document.getElementById("echart_lib_io_top10"));
+	  echart_lib_top10.setOption(option);
+	 
+  }
+  
+  function init_echart_lib_dept_io_top10() {
+	  $("#echart_lib_dept_io_top10_panel").showLoading();
+	  option = {
+			    title : {
+			        text: '某地区蒸发量和降水量',
+			        subtext: '纯属虚构'
+			    },
+			    tooltip : {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			        data:['蒸发量','降水量']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            mark : {show: true},
+			            dataView : {show: true, readOnly: false},
+			            magicType : {show: true, type: ['line', 'bar']},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'蒸发量',
+			            type:'bar',
+			            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+			            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }
+			        },
+			        {
+			            name:'降水量',
+			            type:'bar',
+			            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+			            markPoint : {
+			                data : [
+			                    {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+			                    {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name : '平均值'}
+			                ]
+			            }
+			        }
+			    ]
+			};
+	  echart_lib_dept_io_top10 = echarts.init(document.getElementById("echart_lib_dept_io_top10"));
+	  echart_lib_dept_io_top10.setOption(option);
+	  $("#echart_lib_dept_io_top10_panel").hideLoading();
+  }
+  </script>
+</html>

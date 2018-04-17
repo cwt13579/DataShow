@@ -1,0 +1,270 @@
+/**
+ * 创建于:2014-5-6<br>
+ * 版权所有(C) 2014 欧姆软件<br>
+ * 表单控件对应的css服务
+ * @author chender
+ * @version 1.0.0
+ */
+ .lt_form_root{
+	width:100%;
+	height:100%;
+	color:black;
+	font-size:12px;
+	position: relative;
+	overflow:hidden; 
+	border-width: 0px !important;
+}
+ .lt_form_itemLabelDiv{
+  overflow: hidden;
+ }
+ 
+ .lt_form_head{
+  position:absolute;
+  left:2px;
+  right:2px;
+  width:auto;
+  height:80px;
+  border-width:0px;
+  padding-top:0px;
+  background: #ffffff;
+ }
+ 
+ .lt_form_head_tab{
+ 	width:3000px;
+ 	height:35px;
+ 	border-width:0px;
+ 	white-space: nowrap;
+    overflow: hidden;
+ }
+ .lt_form_head_tabItem{
+  width:120px;
+  float:left;
+  margin-right:3px;
+  border-width: 0px !important;
+  border-radius:5px 5px 0px 0px;
+  cursor:pointer;
+ }
+ 
+ .lt_form_head_tab>.notselected{
+ 	height:25px;
+ 	margin-top:10px;
+ }
+ 
+ .lt_form_head_tab>.selected{
+ 	height:29px;
+ 	margin-top:6px;
+ }
+ 
+ .lt_form_head_tabItem>div{
+   text-align: center;
+   height:18px;
+   margin-top:6%;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+ 
+ .lt_form_operArea{
+ 	border-width:0px !important;
+ 	border-bottom-width: 2px !important;
+ }
+ 
+.lt_form_body{
+	position:absolute;
+	top:83px;
+	bottom:0px;
+	left:10px;
+	right:3px;
+	width:auto;
+	height:auto;
+	overflow-y:auto;
+	overflow-x:hidden; 
+}
+
+.lt_form_root>div{
+	padding-right: 0px;
+}
+
+.lt_form_item{
+	float:left;
+	width:auto;
+	position: relative;
+	min-height: 32px;
+}
+.lt_form_item>*{
+	float:left;
+}
+
+
+.lt_form_item_label{
+	display:table-cell;
+	vertical-align:middle;
+	width:999px;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-height:14px;
+	height:100%;
+}
+.lt_form_item_elementDiv{
+	position:relative;
+	float:left;
+	padding-bottom: 4px;
+	margin-left:6px;
+	margin-right:4px;
+}
+.lt_form_item_elementDiv>.descImg{
+	height:90%;
+	margin-top:4px;
+	position: absolute;
+	right:-2px;
+	margin-top:0px\9;
+	right:-5px\9;
+	cursor: pointer;
+	z-index:1;
+}
+.lt_form_item_element{
+	position: absolute;
+	top:0px;
+	bottom:0px;
+	height:auto;
+}
+.lt_form_noticeBorder{
+	border:1px dotted red !important;
+}
+.lt_form_fileArea{
+	border-radius:4px;
+	width:100%;
+	height:100%;
+}
+.lt_form_fileArea_thumb{
+	padding-top:3px;
+	position:absolute;
+	width:100%;
+	top:0px;
+	bottom:20px;
+	text-align:center;
+}
+.lt_form_fileArea_thumb.showImg{
+	bottom:0px;
+	padding-top:0px;
+}
+.lt_form_fileArea_label{
+	text-align:center;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	height:16px;	
+	/*
+	display:-webkit-box;
+	-webkit-line-clamp:2;
+	-webkit-box-orient:vertical;
+	*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.lt_form_fileArea_bg{
+	position:absolute;
+	width:100%;
+	height:100%;
+	display:none;
+}
+
+.lt_form_fileArea_oper{
+	position:relative;
+	float:left;
+	height:28px;
+	width:49px;
+	margin-top:5px;
+	margin-left:3px;
+	border-radius:6px;
+	cursor:pointer;
+	line-height:28px;
+	border:0px!important;
+}
+.lt_form_fileArea{
+	position:relative;
+}
+
+.lt_form_fileArea_oper>img{
+	height:22px;
+	float:left;
+	margin-top:3px;
+}
+
+.lt_form_borderDiv{
+	float:left;
+	width:100%;
+	border-bottom:none;
+	margin-top:-1px;
+}
+
+.lt_form_fireArea_empty{
+	display: none;
+	position:absolute;
+	cursor:pointer;
+	right:-4px;
+	top:2px;
+	z-index:100;
+	width:25px;
+	height:25px;
+}
+
+.lt_form_fileArea_hf{
+	opacity:0;
+	filter:alpha(opacity=0);
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100% !important;
+	cursor:pointer;
+}
+.lt_form_float_block{
+	float:left;
+	width:auto;
+	margin-left:10px;
+	margin-top:5px;
+}
+
+.lt_form_check_radio_label{
+	float:right;
+	cursor:pointer;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+
+.lt_form_over_hidden{
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.form-nav-switch{
+	position:absolute;
+	left:10px;
+	right:10px;
+	top:10px;
+	bottom:0px;
+}
+.form-switch-item{
+	float:left;
+	height:100%;
+	line-height:36px;
+	text-align:center;
+	cursor:pointer;
+	border-bottom: 1px solid #f0f0f0;
+	border-left: 1px solid #f0f0f0;
+}
+.form-switch-item:first-child{
+	border-left: 0;
+}
+.form-switch-item.active{
+	background-color:white;
+	border-bottom: 1px solid #5dc5f9;
+	color: #5dc5f9;
+}

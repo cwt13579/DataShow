@@ -1,0 +1,58 @@
+body{
+    font-family: "Microsoft YaHei", 微软雅黑, Arial, Helvetica, sans-serif;
+}
+.panel-stat1 .value{
+    font-size: 30px;
+}
+.channelBox{
+    background: #f9f9f9;
+    color: #666666;
+    border-radius: 0px;
+    box-shadow: 0 3px 5px #E2E2E2;
+}
+.topLineRed{
+    border-top: 6px solid #fc8675;
+}
+.topLineBlue{
+    border-top: 2px solid #199ed8;
+}
+.topLineBlueW{
+    border-top: 6px solid #00ccff;
+}
+.topLineGray{
+    border-top: 6px solid #996600;
+}
+.channelHead{
+    padding: 20px;
+}
+.channelBtn{
+    color: #199ed8;
+    font-weight: bold;
+    padding: 0 2px;
+}
+.channelTitle{
+    color: #199ed8;
+    font-size: 40px;
+}
+.channelMy{
+    color: #666666;
+    font-size: 20px;
+}
+.channelRight{
+    position: relative;
+    top: 15px;
+
+}
+.channelLine{
+    width: 100%;
+    background: #f2f2f2;
+    height: 20px;
+}
+.channelBody{
+    min-height: 450px;
+
+    margin: 20px;
+}
+#channel-elements{
+    padding: 20px;
+}

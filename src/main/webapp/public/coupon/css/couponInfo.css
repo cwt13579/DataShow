@@ -1,0 +1,30 @@
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.top-name{
+	margin-top:25px;
+	text-align: center;
+	font-size: 23px;
+	padding-bottom:25px;
+	border-bottom: #DDDDDD solid 1px;
+}
+.qr-root:after{
+	position: absolute;
+	border-bottom:#cccccc dashed 1px;
+	content:"";
+	padding:0px 5px;
+	height: 1px;
+	left:15px;
+	right:15px;
+}
+.coupon-code{
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 13px;
+}
+.bottom-desc{
+	line-height: 20px;
+	padding:10px 15px;
+	font-size: 13px;
+}

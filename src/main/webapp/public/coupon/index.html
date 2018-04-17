@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>优惠券详情</title>
+		<link rel="stylesheet" href="css/couponInfo.css" />
+		<script type="text/javascript" src="../../common/js/BerUtil.js"></script>
+		<script type="text/javascript" src="../../common/js/qr-encoder.min.js"></script>
+	</head>
+
+	<body>
+		<div id="couponInfo" style="display: none;">
+			<div class="top-name">#{amount}&nbsp;#{name}</div>
+			<div class="qr-root">
+				<div id="qrArea" style="text-align: center;"></div>
+				<div class="coupon-code">#{couponCode}</div>
+			</div>
+			<div class="bottom-desc">
+				<div>使用条件：&nbsp;#{condition}</div>
+				<div>有效时间：&nbsp;#{startTime} 至  #{endTime}</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var giftId = BU.getUrlParam("giftId");
+		var bindCode = BU.getUrlParam("bindCode");
+		var param = {
+			giftId: giftId,
+			bindCode: bindCode
+		}
+		BU.get(BU.getAbsPath("modules/public/gift/couponInfo"), param, function(cpInfo) {
+			buildPage(cpInfo);
+		}, BU.alert);
+
+		function buildPage(cpInfo) {
+			cpInfo.startTime=cpInfo.startTime.substring(0,10);
+			cpInfo.endTime=cpInfo.endTime.substring(0,10);
+			if(cpInfo.limit==0){
+				cpInfo.condition="无使用门槛";
+			}else{
+				cpInfo.condition="满"+cpInfo.limit+"元可使用";
+			}
+			if(cpInfo.type=="1"){
+				cpInfo.name="代金券";
+				cpInfo.amount="￥"+cpInfo.amount+"元";
+			}else if(cpInfo.type=="2"){
+				cpInfo.name="满减券";
+				cpInfo.amount="￥"+cpInfo.amount+"元";
+			}else if(cpInfo.type=="3"){
+				cpInfo.name="折扣券";
+				cpInfo.amount=cpInfo.amount/10+"折";
+			}else if(cpInfo.type=="4"){
+				cpInfo.name="自提码";
+				cpInfo.amount="";
+				cpInfo.condition="到店扫码消费";
+			}
+			couponInfo.innerHTML = BU.bindData(couponInfo.innerHTML, cpInfo);
+			couponInfo.style.display = "block";
+			buildQrCode(cpInfo);
+		}
+
+		function buildQrCode(couponInfo) {
+			var config = {
+				text: "",
+				size: 200,
+				border: 10,
+				color: "black",
+				shape: "smooth",
+				format: "image/svg"
+			};
+			config.text = couponInfo.couponCode;
+			config.shape = "rectangles";
+			config.color = ("#000000");
+			config.bgColor = ("#FFFFFF");
+			config.border = 10;
+			qrArea.innerHTML = QR.encode(config);
+		}
+	</script>
+
+</html>

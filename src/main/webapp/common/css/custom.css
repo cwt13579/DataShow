@@ -1,0 +1,94 @@
+.secondNav .navName{
+    padding-left: 30px;
+}
+.thirdNav .navName{
+    padding-left: 40px;
+}
+.firstNav{
+    background: #E8E8EA;
+}
+.secondNav{
+    background: #F3F1F1;
+}
+.thirdNav{
+    background:#FFFFFF;
+}
+.label-text{
+    margin-top: 10px;
+}
+.showHand{
+    cursor: pointer;
+}
+.table-footer .text-center input{
+    border: 1px solid #E2E0E0;
+    border-radius: 5px;
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    margin: 0 3px;
+}
+.table-footer .table-footer-line{
+    width: 35px;
+    border: 1px solid #E2E0E0;
+    border-radius: 5px;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+}
+.test-input-box .test-err {
+    display:none;
+    position: absolute;
+    right: 20px;
+    bottom: 9px;
+
+}
+.test-input-box .test-err.active{
+    display: inline-block;
+}
+.test-input-box {
+    position: relative;
+}
+ .treeview .first-tree{
+    padding-left: 10px;
+ }
+ .treeview .second-tree{
+     padding-left: 30px;
+ }
+ .treeview .third-tree{
+     padding-left: 50px;
+ }
+ .treeview .four-tree{
+     padding-left: 70px;
+ }
+ .treeview .tree-icon{
+     position: relative;
+     top: 5px;
+     cursor: pointer;
+ }
+
+.checkList .checkbox{
+	display: inline-block;
+}
+.checkList{
+
+	padding-left: 30px;
+}
+#updateChannelRole ,#addChannelRole{
+   margin-top: 10px;
+    border: 1px solid #f0f0f0;
+    padding: 10px 0;
+}
+#updateChannelRole .checkbox ,#addChannelRole .checkbox {
+	    margin: 2px 0;
+	
+}
+#navList{
+    line-height: 30px;
+}
+.navShow{
+    display: none;
+}
+.small-input{
+	display: inline-block;
+    width: 150px;
+}

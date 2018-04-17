@@ -1,0 +1,13 @@
+.pui-inputtext {
+    margin: 0;
+    outline: medium none;
+    padding-left: 4px;
+    padding-right: 2px;
+    min-height:20px;
+    font-weight: normal;
+}
+
+.ui-widget-header .pui-inputtext,
+.ui-widget-content .pui-inputtext {
+    font-weight: normal;
+}
