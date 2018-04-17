@@ -11,11 +11,11 @@ public class HelloController extends BaseController{
   }
   public void sendHz() throws UnsupportedEncodingException {
     //getRequest().setCharacterEncoding("UTF-8");
-    String name = getRequest().getParameter("name");
-    getRequest().setCharacterEncoding("");
-    System.out.println("name="+name);
-    String dename = URLDecoder.decode(name);
-    System.out.println("dename="+dename);
+    //String name = getRequest().getParameter("name");
+    //getRequest().setCharacterEncoding("");
+    //System.out.println("name="+name);
+   // String dename = URLDecoder.decode(name);
+   // System.out.println("dename="+dename);
     renderText("sendHz汉字");
   }
 }

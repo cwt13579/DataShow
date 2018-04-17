@@ -13,13 +13,10 @@
   <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
-        <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>首页</a>
+        <a href="/product" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>首页</a>
     </div>
     <div class="navbar-header">
-        <a href="/getConsumerList" class="navbar-brand"><span class="glyphicon glyphicon-shopping-cart"></span>消费记录</a>
-    </div>
-    <div class="navbar-header">
-        <a href="/getLibInOutList" class="navbar-brand"><span class="glyphicon glyphicon-log-in"></span> 图书馆访问记录</a>
+        <a href="/product" class="navbar-brand"><span class="glyphicon glyphicon-shopping-cart"></span>产品列表</a>
     </div>
      <div class="navbar-header  navbar-right">
         <a href="/login/logout" class="navbar-brand"><span class="glyphicon"></span> 退出</a>
@@ -56,7 +53,7 @@
   <script src="/common/loading/js/jquery.showLoading.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-	  getLibIOTop10Data();
+	  //getLibIOTop10Data();
 	  //init_echart_lib_dept_io_top10();
   });
   function getLibIOTop10Data() {

@@ -1,5 +1,6 @@
 package com.demo.common;
 
+import com.demo.common.model._MappingKit;
 import com.demo.index.HelloController;
 import com.demo.index.IndexController;
 import com.demo.index.LoginController;
@@ -11,9 +12,11 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.wxb.datashow.modules.product.ProductController;
 import com.wxb.datashow.modules.tsg.TsgController;
 
 /**
@@ -62,6 +65,7 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/login", LoginController.class,"/modules/login");
 		me.add("/tsg", TsgController.class);
 		me.add("/hello", HelloController.class);
+		me.add("/product", ProductController.class,"/modules/product");
 	}
 	
 	public void configEngine(Engine me) {
@@ -72,7 +76,11 @@ public class DemoConfig extends JFinalConfig {
 	 * 配置插件
 	 */
 	public void configPlugin(Plugins me) {
- 
+	  DruidPlugin dp = createDruidPlugin();
+	  me.add(dp);
+	  ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
+	  me.add(arp);
+	  _MappingKit.mapping(arp);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {
