@@ -1,0 +1,13 @@
+1.接口访问url
+http://ip:8080/wxservice/getProductBy
+
+2.接口入参 请以qm. 开头 
+如：借款金额 qm.load_amt
+
+3.接口数据交换格式为json格式
+如：{code:1,data:[],msg:"成功"}
+
+code=1 成功   、code=0 失败
+data 为 返回的产品列表
+msg 为返回说明
+

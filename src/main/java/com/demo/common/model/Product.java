@@ -38,4 +38,12 @@ public class Product extends BaseProduct<Product> {
 	    }
 	    return page;
 	  }
+	 
+	 public List<Product> getProductBy( Map<String, String> map) {
+	   List<Object> paramList = new ArrayList<Object>();
+       StringBuilder condition = new StringBuilder();
+       String from = "select * FROM  product a where 1=1 ";
+       
+	   return find(from+condition.toString(), paramList.toArray(new Object[] {}));
+	 }
 }

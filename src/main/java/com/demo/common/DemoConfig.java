@@ -18,6 +18,7 @@ import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wxb.datashow.modules.product.ProductController;
 import com.wxb.datashow.modules.tsg.TsgController;
+import com.wxinterface.service.WXController;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
@@ -66,6 +67,7 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/tsg", TsgController.class);
 		me.add("/hello", HelloController.class);
 		me.add("/product", ProductController.class,"/modules/product");
+		me.add("/wxservice", WXController.class);
 	}
 	
 	public void configEngine(Engine me) {

@@ -9,6 +9,10 @@ public class WsRes {
 	public static Integer SUCCESS = 1;
 	public static Integer FAIL = 0;
 	
+	public WsRes() {
+	  this.code = SUCCESS;
+	  this.msg = "操作成功";
+	}
 	public Integer getCode() {
 		return code;
 	}
