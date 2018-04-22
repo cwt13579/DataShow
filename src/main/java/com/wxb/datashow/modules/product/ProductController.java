@@ -1,8 +1,12 @@
 package com.wxb.datashow.modules.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.demo.common.model.Product;
+import com.demo.common.model.ProductRegion;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -12,7 +16,7 @@ import com.wxb.datashow.common.WsRes;
 public class ProductController extends BaseController {
 
   public void index() {
-    render("productList.html");
+    render("productList.jsp");
   }
 
   public void productListInvoke() {
@@ -32,30 +36,64 @@ public class ProductController extends BaseController {
   }
 
   public void productAdd() {
-    renderJsp("productAdd.html");
+    renderJsp("productAdd.jsp");
   }
+
   @Before({Tx.class})
   public void productSaveInvoke() {
     WsRes res = new WsRes();
-    Product product = getModel( Product.class, "product" );
-    String[] loanWorks = getParaValues("product.loan_work");
-    String[] loanHouses = getParaValues("product.loan_house");
-    product.setLoanWork(StringUtils.join(loanWorks,","));
-    product.setLoanHouse(StringUtils.join(loanHouses,","));
+    Product product = getModel(Product.class, "product");
     product.save();
-    renderJson( res );
+
+    String[] regionIds = getParaValues("productRegion.region_id");
+    ProductRegion.dao.deleteByProductId(product.getId().longValue());
+    for (String item : regionIds) {
+      ProductRegion productRegion = new ProductRegion();
+      productRegion.setProductId(product.getId().longValue());
+      productRegion.setRegionId(Long.valueOf(item));
+      productRegion.save();
+    }
+
+    renderJson(res);
   }
+
   public void productEdit() throws Exception {
     String id = getPara("id");
     Product product = Product.dao.findById(id);
-    setAttr("product",product);
-    render("productEdit.html");
+    List<ProductRegion> productRegions = ProductRegion.dao.getProductRegionByProductId(id);
+    List<Long> regions = new ArrayList<Long>();
+    for (ProductRegion item : productRegions) {
+      regions.add(item.getRegionId());
+    }
+    setAttr("product", product);
+    setAttr("regions", StringUtils.join(regions,","));
+    render("productEdit.jsp");
   }
-  
+
   public void productUpdateInvoke() {
     WsRes res = new WsRes();
-    Product product = getModel( Product.class, "product" );
+    Product product = getModel(Product.class, "product");
     product.update();
-    renderJson( res );
+
+    //处理区域下拉框
+    String[] regionIds = getParaValues("productRegion.region_id");
+    ProductRegion.dao.deleteByProductId(product.getId().longValue());
+    for (String item : regionIds) {
+      ProductRegion productRegion = new ProductRegion();
+      productRegion.setProductId(product.getId().longValue());
+      productRegion.setRegionId(Long.valueOf(item));
+      productRegion.save();
+    }
+
+
+    renderJson(res);
+  }
+
+  public void productDeleteInvoke() {
+    WsRes res = new WsRes();
+    String id = getPara("id");
+    Product product = Product.dao.findById(id);
+    product.delete();
+    renderJson(res);
   }
 }

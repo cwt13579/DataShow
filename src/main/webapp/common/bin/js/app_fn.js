@@ -115,9 +115,14 @@
 				}
 				$.each(data, function(i,status){
 					var option = $('<option value=' + status.value + '>' + status.note + '</option>');
-					if(status.value == selectedValue) {
-						option.attr("selected", "selected");
-					}
+			
+					selectedValue.forEach(function(e){ 
+			
+						if(status.value == e) {
+							option.attr("selected", "selected");
+						}
+					});
+					
 					select.append(option);
 				});
 			},

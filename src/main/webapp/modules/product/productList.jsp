@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,16 +13,7 @@
  
   </head>
   <body>
-  <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-  <div class="container">
-     <div class="navbar-header">
-        <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>首页</a>
-    </div>
-    <div class="navbar-header">
-        <a href="/product" class="navbar-brand"><span class="glyphicon glyphicon-shopping-cart"></span>产品列表</a>
-    </div>
-  </div>
-</div>
+  <%@ include file="/modules/common/header.jsp"%>   
  <div class="container-fluid">
         <div class="row page-header">
 			<div class="col-xs-3">
@@ -64,6 +57,8 @@
 								<th>产品名称</th>
 								<th>产品期限</th>
 								<th>产品额度</th>
+								<th>产品简介</th>
+								<th>合作机构</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -84,8 +79,10 @@
 		<tr>
             <td>{{item.product_code}}</td>
             <td>{{item.product_name}}</td>
-            <td>{{item.loan_term}}</td>
-            <td>{{item.loan_amount}}</td>
+            <td>{{item.product_period}}</td>
+            <td>{{item.product_limit}}</td>
+            <td>{{item.product_intro}}</td>
+            <td>{{item.institution}}</td>
             <td>
                 <a href="#" onclick="editProduct({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>
 				<a href="#" onclick="deleteProduct({{item.id}})"><span class="glyphicon glyphicon-trash"></span> 删除</a>
@@ -98,9 +95,9 @@
   <script src="/common/bootstrap/js/bootstrap.min.js"></script>
   <script src="/common/tpl/template.js"></script>
   <script src="/common/p/p.js"></script>
+    <script src="/common/layer/layer.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-
 		getData(1);
 		$('#reload').click(function(){
 			getData(1);
@@ -119,13 +116,12 @@
 			success: function(resp){
 				if(resp && resp.code) {
 					if(resp.code==1) {
-						console.log(resp);
 						var html = template('listScript', resp.data);
 						$('#listContainer').html(html);
 						// 设置翻页控件
 						$('#page').paginator({
 							current_page : index,
-							page_count : resp.data.totalRow/10,
+							page_count : resp.data.totalPage,
 							button_number : 5,
 							total_count : resp.data.totalRow,
 							page_size : 10,
@@ -155,6 +151,35 @@
     }
     function editProduct(id) {
     	window.location = '/product/productEdit?id=' + id;
+    }
+    function deleteProduct(id) {
+    	layer.confirm('删除确认', '', function() {
+    	  $.ajax({
+    		url:"/product/productDeleteInvoke?id=" + id,
+    		method : "post",
+            beforeSend : function() {
+    		},
+    		success : function(data) {
+    			if (data && data.code == 1) {
+    				layer.msg("删除成功",{time:1000},function(){
+    					getData(1);
+					});
+    				
+    			} else {
+    				layer.msg("系统异常，删除失败",{time:1000});
+    			}
+    		},
+    		error : function() {
+    			layer.msg("删除失败",{time:1000},function(){
+					getData(1);
+				});
+    		}
+    	});
+      },400);
+    }
+    function clearCondition() {
+        $("#productName").val('');
+        getData(1);
     }
   </script>
 </html>

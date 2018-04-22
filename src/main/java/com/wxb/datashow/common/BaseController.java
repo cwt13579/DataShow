@@ -28,6 +28,8 @@ public class BaseController extends Controller {
     return map;
   }
 
+ 
+ 
   protected int getPageCurrent() {
     int current = getParaToInt("current", 0);
     if (current == 0) {

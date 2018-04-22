@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.common.model.Region;
 import com.wxb.datashow.common.BaseController;
 import com.wxb.datashow.web.enums.DataStatus;
 import com.wxb.datashow.web.enums.OpResult;
@@ -67,4 +68,19 @@ public class EnumController extends BaseController
         renderJson( list );
     }
     
+    //获取地区信息 
+    public void regionInvoke()
+    {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        List<Region> regionList = Region.dao.getAllProvice();
+        for( Region region : regionList )
+        {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put( "value", String.valueOf(region.getRegionId()) );
+                map.put( "note", region.getRegionName() );
+                list.add( map );
+
+        }
+        renderJson( list );
+    }
 }

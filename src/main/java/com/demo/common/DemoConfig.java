@@ -16,8 +16,12 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.wxb.datashow.modules.preorder.PreOrderController;
 import com.wxb.datashow.modules.product.ProductController;
+import com.wxb.datashow.modules.productrule.ProductRuleController;
 import com.wxb.datashow.modules.tsg.TsgController;
+import com.wxb.datashow.web.controller.EnumController;
+import com.wxb.datashow.web.controller.PictureController;
 import com.wxinterface.service.WXController;
 
 /**
@@ -67,7 +71,11 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/tsg", TsgController.class);
 		me.add("/hello", HelloController.class);
 		me.add("/product", ProductController.class,"/modules/product");
+		me.add("/productRule", ProductRuleController.class,"/modules/productrule");
+		me.add("/upload", PictureController.class);
 		me.add("/wxservice", WXController.class);
+		me.add("/enum", EnumController.class);
+		me.add("/preOrder", PreOrderController.class,"/modules/preorder");
 	}
 	
 	public void configEngine(Engine me) {

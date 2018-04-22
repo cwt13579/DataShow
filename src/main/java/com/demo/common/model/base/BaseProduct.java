@@ -9,13 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseProduct<M extends BaseProduct<M>> extends Model<M> implements IBean {
 
-	public M setId(java.lang.Long id) {
+	public M setId(java.math.BigInteger id) {
 		set("id", id);
 		return (M)this;
 	}
 	
-	public java.lang.Long getId() {
-		return getLong("id");
+	public java.math.BigInteger getId() {
+		return get("id");
 	}
 
 	public M setProductCode(java.lang.String productCode) {
@@ -36,112 +36,94 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends Model<M> imp
 		return getStr("product_name");
 	}
 
-	public M setLoanTerm(java.lang.Integer loanTerm) {
-		set("loan_term", loanTerm);
+	public M setProductIntro(java.lang.String productIntro) {
+		set("product_intro", productIntro);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getLoanTerm() {
-		return getInt("loan_term");
+	public java.lang.String getProductIntro() {
+		return getStr("product_intro");
 	}
 
-	public M setLoanAmount(java.math.BigDecimal loanAmount) {
-		set("loan_amount", loanAmount);
+	public M setProductLimit(java.math.BigDecimal productLimit) {
+		set("product_limit", productLimit);
 		return (M)this;
 	}
 	
-	public java.math.BigDecimal getLoanAmount() {
-		return get("loan_amount");
+	public java.math.BigDecimal getProductLimit() {
+		return get("product_limit");
 	}
 
-	public M setLoanWork(java.lang.String loanWork) {
-		set("loan_work", loanWork);
+	public M setProductPeriod(java.lang.Integer productPeriod) {
+		set("product_period", productPeriod);
 		return (M)this;
 	}
 	
-	public java.lang.String getLoanWork() {
-		return getStr("loan_work");
+	public java.lang.Integer getProductPeriod() {
+		return getInt("product_period");
 	}
 
-	public M setLoanIncome(java.math.BigDecimal loanIncome) {
-		set("loan_income", loanIncome);
+	public M setProductRate(java.math.BigDecimal productRate) {
+		set("product_rate", productRate);
 		return (M)this;
 	}
 	
-	public java.math.BigDecimal getLoanIncome() {
-		return get("loan_income");
+	public java.math.BigDecimal getProductRate() {
+		return get("product_rate");
 	}
 
-	public M setLoanWorkyears(java.lang.Integer loanWorkyears) {
-		set("loan_workyears", loanWorkyears);
+	public M setInterestWay(java.lang.Integer interestWay) {
+		set("interest_way", interestWay);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getLoanWorkyears() {
-		return getInt("loan_workyears");
+	public java.lang.Integer getInterestWay() {
+		return getInt("interest_way");
 	}
 
-	public M setLoanBisincome(java.math.BigDecimal loanBisincome) {
-		set("loan_bisincome", loanBisincome);
+	public M setDrawWay(java.lang.Integer drawWay) {
+		set("draw_way", drawWay);
 		return (M)this;
 	}
 	
-	public java.math.BigDecimal getLoanBisincome() {
-		return get("loan_bisincome");
+	public java.lang.Integer getDrawWay() {
+		return getInt("draw_way");
 	}
 
-	public M setLoanBisyears(java.lang.Integer loanBisyears) {
-		set("loan_bisyears", loanBisyears);
+	public M setApplyWay(java.lang.Integer applyWay) {
+		set("apply_way", applyWay);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getLoanBisyears() {
-		return getInt("loan_bisyears");
+	public java.lang.Integer getApplyWay() {
+		return getInt("apply_way");
 	}
 
-	public M setLoanHouse(java.lang.String loanHouse) {
-		set("loan_house", loanHouse);
+	public M setExclude(java.lang.String exclude) {
+		set("exclude", exclude);
 		return (M)this;
 	}
 	
-	public java.lang.String getLoanHouse() {
-		return getStr("loan_house");
+	public java.lang.String getExclude() {
+		return getStr("exclude");
 	}
 
-	public M setLoanCar(java.lang.String loanCar) {
-		set("loan_car", loanCar);
+	public M setInstitution(java.lang.String institution) {
+		set("institution", institution);
 		return (M)this;
 	}
 	
-	public java.lang.String getLoanCar() {
-		return getStr("loan_car");
+	public java.lang.String getInstitution() {
+		return getStr("institution");
 	}
 
-	public M setLoanInsurance(java.lang.String loanInsurance) {
-		set("loan_insurance", loanInsurance);
+	public M setLogoPath(java.lang.String logoPath) {
+		set("logo_path", logoPath);
 		return (M)this;
 	}
 	
-	public java.lang.String getLoanInsurance() {
-		return getStr("loan_insurance");
-	}
-
-	public M setLoanCredit(java.lang.String loanCredit) {
-		set("loan_credit", loanCredit);
-		return (M)this;
-	}
-	
-	public java.lang.String getLoanCredit() {
-		return getStr("loan_credit");
-	}
-
-	public M setLoanAge(java.lang.String loanAge) {
-		set("loan_age", loanAge);
-		return (M)this;
-	}
-	
-	public java.lang.String getLoanAge() {
-		return getStr("loan_age");
+	public java.lang.String getLogoPath() {
+		return getStr("logo_path");
 	}
 
 }
