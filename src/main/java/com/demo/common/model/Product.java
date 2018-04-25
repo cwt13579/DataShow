@@ -41,11 +41,46 @@ public class Product extends BaseProduct<Product> {
     return page;
   }
 
-  public List<Product> getProductBy(Map<String, String> map) {
+  public List<Product> getProductBy(Map<String, String[]> map) {
     List<Object> paramList = new ArrayList<Object>();
     StringBuilder condition = new StringBuilder();
-    String from = "select * FROM  product a where 1=1 ";
-
+    String from = "select DISTINCT a.* FROM  product a inner join product_rule b on a.product_code=b.product_code inner join product_region c on a.id=c.product_id where 1=1 ";
+    if (!StringUtils.isAllBlank(map.get("loan_amount")) ) {
+      condition.append(" and b.loan_amount <= ?");
+      paramList.add(map.get("loan_amount")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_term")) ) {
+      condition.append(" and b.loan_term <= ?");
+      paramList.add(map.get("loan_term")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_workyears")) ) {
+      condition.append(" and b.loan_workyears <= ?");
+      paramList.add(map.get("loan_workyears")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_income")) ) {
+      condition.append(" and b.loan_income <= ?");
+      paramList.add(map.get("loan_income")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_house")) ) {
+      condition.append(" and b.loan_house = ?");
+      paramList.add(map.get("loan_house")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_car")) ) {
+      condition.append(" and b.loan_car = ?");
+      paramList.add(map.get("loan_car")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_work")) ) {
+      condition.append(" and b.loan_work = ?");
+      paramList.add(map.get("loan_work")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_age")) ) {
+      condition.append(" and b.loan_age <= ?");
+      paramList.add(map.get("loan_age")[0]);
+    }
+    if (!StringUtils.isAllBlank(map.get("loan_area")) ) {
+      condition.append(" and b.loan_area = ?");
+      paramList.add(map.get("loan_area")[0]);
+    }
     return find(from + condition.toString(), paramList.toArray(new Object[] {}));
   }
 }

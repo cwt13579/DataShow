@@ -118,6 +118,13 @@
 						    	   <input type="hidden"  id="logo_path" name="product.logo_path" value="${product.logo_path}" />
 						    	</div>
 						  	</div>
+						  	 <div class="form-group">
+						  		<label class="control-label col-xs-2">产品banner <font color="red">*</font></label>
+						    	<div class="col-xs-2">
+						    	   <input type="file"  id="banner" name="banner" class="form-control file" />
+						    	   <input type="hidden"  id="banner_path" name="product.banner_path" value="${product.banner_path}" />
+						    	</div>
+						  	</div>
 			  				<button type="button" class="btn btn-default btn_loading" onclick="form_save();"><span class="glyphicon glyphicon-ok"></span> 保存</button>
 			  				<span class="img_loading" style="display: none;"><img src="/common/bin/img/loading.gif" /></span>
 			  				<button type="button" class="btn btn-default btn_loading" onclick="form_cancel();"><span class="glyphicon glyphicon-remove"></span> 取消</button>
@@ -142,6 +149,7 @@
   <script type="text/javascript">
 	$(document).ready(function() {
 		$("#region_id").ui_select({schema:"Region",needDefault:false,selectedValue:[]});
+		$("#label_id").ui_select({schema:"Label",needDefault:false,selectedValue:[]});
 		$('#region_id').multiselect({
 			 nonSelectedText: '请选择',
 			    enableFiltering: true,
@@ -150,10 +158,17 @@
 	            buttonWidth: '400px',
 	            dropUp: true
         });
-		
+		$('#label_id').multiselect({
+		    nonSelectedText: '请选择',
+		    enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 200,
+            buttonWidth: '400px',
+            dropUp: true
+       });
 		$("#logo").fileinput({
 	    	  language: 'zh', //设置语言
-		      uploadUrl: "/upload/uploadPicture", //上传的地址
+		      uploadUrl: "/upload/uploadPicture?name=logo", //上传的地址
 		      enctype: 'multipart/form-data',
 		      showPreview:true,
 		      uploadAsync:true,
@@ -176,6 +191,34 @@
 		  });
 		 //上传前
 		 $('#logo').on('filepreupload', function(event, data, previewId, index) {
+		       
+		 });
+		 
+		 $("#banner").fileinput({
+	    	  language: 'zh', //设置语言
+		      uploadUrl: "/upload/uploadPicture?name=banner", //上传的地址
+		      enctype: 'multipart/form-data',
+		      showPreview:true,
+		      uploadAsync:true,
+		      dropZoneEnabled: false,//是否显示拖拽区域
+		      allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+	    });
+		 $("#banner").on("fileuploaded", function (event, data, previewId, index) {
+		        if (data.code == 0) {
+		            layer.msg('文件上传失败:'+msg);
+		            return;
+		        }
+		        //文件上传成功
+		        $("#banner_path").val(data.response.data);
+		  });
+		 $('#banner').on('fileerror', function(event, data, msg) {
+			 if (data.code == 0) {
+		            layer.msg('fileerror文件上传失败:'+msg);
+		            return;
+		        }
+		  });
+		 //上传前
+		 $('#banner').on('filepreupload', function(event, data, previewId, index) {
 		       
 		 });
 	});

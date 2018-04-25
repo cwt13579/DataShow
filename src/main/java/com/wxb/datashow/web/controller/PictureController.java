@@ -11,8 +11,9 @@ public class PictureController extends BaseController{
 
   public void uploadPicture() {
     WsRes res = new WsRes();
+    String name = getPara("name");
     //处理图片上传
-    UploadFile uf = getFile("logo", "uploads");
+    UploadFile uf = getFile(name, "uploads");
     File uploadFile = uf.getFile();
     String uploadFileName = uf.getFileName();
     String url = OSSUploadUtil.uploadFile(uploadFile, uploadFileName.substring(uploadFileName.lastIndexOf(".")+1));

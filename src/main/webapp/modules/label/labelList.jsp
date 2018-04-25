@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>产品列表</title>
+    <title>标签列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -17,10 +17,10 @@
  <div class="container-fluid">
         <div class="row page-header">
 			<div class="col-xs-3">
-				<h4><span class="glyphicon glyphicon-th"></span> 产品列表</h4>
+				<h4><span class="glyphicon glyphicon-th"></span> 标签列表</h4>
 			</div>
 			<div class="col-xs-9" style="text-align: right; padding-right: 0px;">
-				<button type="button" class="btn btn-default btn_loading" onclick="addProduct()"><span class="glyphicon glyphicon-plus"></span>新增</button>
+				<button type="button" class="btn btn-default btn_loading" onclick="addLabel()"><span class="glyphicon glyphicon-plus"></span>新增</button>
 			</div>
 		</div>
 		<div class="row">
@@ -29,8 +29,8 @@
 						<div class="panel-body" style="background-color: #eeeeee;">
 							<form id="search_form" method="post" class="form-inline">
 								<div class="form-group">
-									<label>产品名称</label> <input type="text" class="form-control"
-										id="productName" name="qm.product_name"></input>
+									<label>标签名称</label> <input type="text" class="form-control"
+										id="labelName" name="qm.label_name"></input>
 								</div>
 								<button type="button" class="btn btn-primary btn_loading"
 									onclick="getData(1);">
@@ -53,12 +53,9 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>产品编号</th>
-								<th>产品名称</th>
-								<th>产品期限</th>
-								<th>产品额度</th>
-								<th>产品简介</th>
-								<th>合作机构</th>
+								<th>标签编号</th>
+								<th>标签名称</th>
+								<th>标签简介</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -77,15 +74,13 @@
   <script id="listScript" type="text/html">
 		{{each list as item}}
 		<tr>
-            <td>{{item.product_code}}</td>
-            <td>{{item.product_name}}</td>
-            <td>{{item.product_period}}</td>
-            <td>{{item.product_limit}}</td>
-            <td>{{item.product_intro}}</td>
-            <td>{{item.institution}}</td>
+            <td>{{item.label_code}}</td>
+            <td>{{item.label_name}}</td>
+            <td>{{item.remark}}</td>	
+ 
             <td>
-                <a href="#" onclick="editProduct({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>
-				<a href="#" onclick="deleteProduct({{item.id}})"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                <a href="#" onclick="editLabel({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>
+				<a href="#" onclick="deleteLabel({{item.id}})"><span class="glyphicon glyphicon-trash"></span> 删除</a>
 			</td>
 		</tr>
 		{{/each}}
@@ -105,7 +100,7 @@
 	});
     function getData(index) {
 	    $.ajax({
-			url: "/product/productListInvoke?current=" + index,
+			url: "/label/labelListInvoke?current=" + index,
 			method:"post",
 			data:$("#search_form").serialize(),
 			dataType: "json",
@@ -146,16 +141,16 @@
 			});
 	      }
   
-    function addProduct() {
-    	window.location="/product/productAdd";
+    function addLabel() {
+    	window.location="/label/labelAdd";
     }
-    function editProduct(id) {
-    	window.location = '/product/productEdit?id=' + id;
+    function editLabel(id) {
+    	window.location = '/label/labelEdit?id=' + id;
     }
-    function deleteProduct(id) {
+    function deleteLabel(id) {
     	layer.confirm('删除确认', '', function() {
     	  $.ajax({
-    		url:"/product/productDeleteInvoke?id=" + id,
+    		url:"/label/labelDeleteInvoke?id=" + id,
     		method : "post",
             beforeSend : function() {
     		},
@@ -178,7 +173,7 @@
       },400);
     }
     function clearCondition() {
-        $("#productName").val('');
+        $("#labelName").val('');
         getData(1);
     }
   </script>

@@ -16,6 +16,15 @@ var path = '${path}';
 						<li><a href="/product">产品管理</a></li>
 						<li><a href="/productRule">产品规则管理</a></li>
 						<li><a href="/preOrder">产品预约管理</a></li>
+						<li><a href="/label">产品标签管理</a></li>
+					</ul> 
+	        	</li>
+	  </ul>
+	  <ul class="nav navbar-nav">
+	        	<li class="dropdown">
+	        	   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><spanclass="caret">基础管理</span></a>
+	        	   <ul class="dropdown-menu">
+						<li><a href="/sysDict">字典数据管理</a></li>
 					</ul> 
 	        	</li>
 	  </ul>

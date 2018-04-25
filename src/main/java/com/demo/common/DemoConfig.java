@@ -16,12 +16,14 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.wxb.datashow.modules.label.LabelController;
 import com.wxb.datashow.modules.preorder.PreOrderController;
 import com.wxb.datashow.modules.product.ProductController;
 import com.wxb.datashow.modules.productrule.ProductRuleController;
 import com.wxb.datashow.modules.tsg.TsgController;
 import com.wxb.datashow.web.controller.EnumController;
 import com.wxb.datashow.web.controller.PictureController;
+import com.wxb.datashow.web.controller.SysDictController;
 import com.wxinterface.service.WXController;
 
 /**
@@ -76,6 +78,8 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/wxservice", WXController.class);
 		me.add("/enum", EnumController.class);
 		me.add("/preOrder", PreOrderController.class,"/modules/preorder");
+		me.add("/sysDict", SysDictController.class,"/modules/sysdict");
+		me.add("/label", LabelController.class,"/modules/label");
 	}
 	
 	public void configEngine(Engine me) {

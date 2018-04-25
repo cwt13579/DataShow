@@ -23,6 +23,7 @@ public class _MappingKit {
 		arp.addMapping("product_region", "id", ProductRegion.class);
 		arp.addMapping("product_rule", "id", ProductRule.class);
 		arp.addMapping("region", "region_id", Region.class);
+		arp.addMapping("sys_dict", "id", SysDict.class);
 	}
 }
 

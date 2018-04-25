@@ -28,6 +28,10 @@ public class BaseController extends Controller {
     return map;
   }
 
+  public Map<String, String[]> getAllQueryMap() {
+    Map<String, String[]> parasMap = getRequest().getParameterMap();
+    return parasMap;
+  }
  
  
   protected int getPageCurrent() {

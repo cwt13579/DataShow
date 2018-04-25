@@ -126,4 +126,22 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends Model<M> imp
 		return getStr("logo_path");
 	}
 
+	public M setProductType(java.lang.Integer productType) {
+		set("product_type", productType);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getProductType() {
+		return getInt("product_type");
+	}
+
+	public M setProductStatus(java.lang.Integer productStatus) {
+		set("product_status", productStatus);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getProductStatus() {
+		return getInt("product_status");
+	}
+
 }
