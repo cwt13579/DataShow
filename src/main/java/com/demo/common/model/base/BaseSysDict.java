@@ -9,67 +9,67 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseSysDict<M extends BaseSysDict<M>> extends Model<M> implements IBean {
 
-  public M setId(java.math.BigInteger id) {
-    set("id", id);
-    return (M) this;
-  }
+	public M setId(java.math.BigInteger id) {
+		set("id", id);
+		return (M)this;
+	}
+	
+	public java.math.BigInteger getId() {
+		return get("id");
+	}
 
-  public java.math.BigInteger getId() {
-    return get("id");
-  }
+	public M setDataType(java.lang.String dataType) {
+		set("data_type", dataType);
+		return (M)this;
+	}
+	
+	public java.lang.String getDataType() {
+		return getStr("data_type");
+	}
 
-  public M setDataType(java.lang.String dataType) {
-    set("data_type", dataType);
-    return (M) this;
-  }
+	public M setDataValue(java.lang.Integer dataValue) {
+		set("data_value", dataValue);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getDataValue() {
+		return getInt("data_value");
+	}
 
-  public java.lang.String getDataType() {
-    return getStr("data_type");
-  }
+	public M setDataName(java.lang.String dataName) {
+		set("data_name", dataName);
+		return (M)this;
+	}
+	
+	public java.lang.String getDataName() {
+		return getStr("data_name");
+	}
 
-  public M setDataValue(java.lang.Integer dataValue) {
-    set("data_value", dataValue);
-    return (M) this;
-  }
+	public M setStatus(java.lang.Integer status) {
+		set("status", status);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getStatus() {
+		return getInt("status");
+	}
 
-  public java.lang.Integer getDataValue() {
-    return getInt("data_value");
-  }
+	public M setCreateTime(java.util.Date createTime) {
+		set("create_time", createTime);
+		return (M)this;
+	}
+	
+	public java.util.Date getCreateTime() {
+		return get("create_time");
+	}
 
-  public M setDataName(java.lang.String dataName) {
-    set("data_name", dataName);
-    return (M) this;
-  }
-
-  public java.lang.String getDataName() {
-    return getStr("data_name");
-  }
-
-  public M setStatus(java.lang.Integer status) {
-    set("status", status);
-    return (M) this;
-  }
-
-  public java.lang.Integer getStatus() {
-    return getInt("status");
-  }
-
-  public M setCreateTime(java.util.Date createTime) {
-    set("create_time", createTime);
-    return (M) this;
-  }
-
-  public java.util.Date getCreateTime() {
-    return get("create_time");
-  }
-
-  public M setRemark(java.lang.String remark) {
-    set("remark", remark);
-    return (M) this;
-  }
-
-  public java.lang.String getRemark() {
-    return getStr("remark");
-  }
+	public M setRemark(java.lang.String remark) {
+		set("remark", remark);
+		return (M)this;
+	}
+	
+	public java.lang.String getRemark() {
+		return getStr("remark");
+	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.demo.common.model.Label;
+import com.demo.common.model.ProductRule;
 import com.demo.common.model.Region;
 import com.demo.common.model.SysDict;
 import com.wxb.datashow.common.BaseController;
@@ -100,4 +101,18 @@ public class EnumController extends BaseController {
     }
     renderJson(list);
   }
+//获取label
+ public void ruleInvoke() {
+   List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+   List<ProductRule> productRuleList = ProductRule.dao.getProductRuleBy(null);
+   for (ProductRule rule : productRuleList) {
+     Map<String, String> map = new HashMap<String, String>();
+     map.put("value", String.valueOf(rule.getId()));
+     map.put("note", rule.getRuleName());
+     list.add(map);
+
+   }
+   renderJson(list);
+ }
+  
 }

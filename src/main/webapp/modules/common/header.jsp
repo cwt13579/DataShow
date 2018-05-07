@@ -29,10 +29,10 @@ var path = '${path}';
 	        	</li>
 	  </ul>
       <ul class="nav navbar-nav navbar-right" style="font-size: 12px;font-weight: normal;">
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">zb <span class="caret"></span></a>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">admin <span class="caret"></span></a>
           <ul class="dropdown-menu" aria-labelledby="download">
             <li><a href="./bootstrap.min.css">设置</a></li>
-            <li><a href="/logout">退出</a></li>
+            <li><a href="/login/logout">退出</a></li>
           </ul></li>
       </ul>
     </div>

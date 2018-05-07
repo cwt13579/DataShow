@@ -144,4 +144,13 @@ public abstract class BaseProductRule<M extends BaseProductRule<M>> extends Mode
 		return getStr("loan_age");
 	}
 
+	public M setRuleName(java.lang.String ruleName) {
+		set("rule_name", ruleName);
+		return (M)this;
+	}
+	
+	public java.lang.String getRuleName() {
+		return getStr("rule_name");
+	}
+
 }

@@ -19,13 +19,13 @@ public class ProductRule extends BaseProductRule<ProductRule> {
 	 public Page<ProductRule> getAllProductRule(int current, int pageSize, Map<String, String> map) {
        List<Object> paramList = new ArrayList<Object>();
        StringBuilder condition = new StringBuilder();
-       String name = map.get("product_name");
+       String name = map.get("rule_name");
 
        String from = "FROM  product_rule a where 1=1 ";
        condition.append(from);
 
        if (!StringUtils.isBlank(name)) {
-         condition.append(" and a.product_name like ?");
+         condition.append(" and a.rule_name like ?");
          paramList.add("%" + name + "%");
        }
 

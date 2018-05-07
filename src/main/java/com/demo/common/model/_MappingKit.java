@@ -16,12 +16,14 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("finance", "id", Finance.class);
 		arp.addMapping("label", "id", Label.class);
 		arp.addMapping("pre_order", "id", PreOrder.class);
 		arp.addMapping("product", "id", Product.class);
 		arp.addMapping("product_label", "id", ProductLabel.class);
 		arp.addMapping("product_region", "id", ProductRegion.class);
 		arp.addMapping("product_rule", "id", ProductRule.class);
+		arp.addMapping("product_rule_relation", "id", ProductRuleRelation.class);
 		arp.addMapping("region", "region_id", Region.class);
 		arp.addMapping("sys_dict", "id", SysDict.class);
 	}

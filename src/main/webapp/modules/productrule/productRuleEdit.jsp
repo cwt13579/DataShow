@@ -29,24 +29,14 @@
 						<form id="productrule_update_form" method="post" class="form-horizontal">
 						    <input type="hidden" name="productRule.id" value="${productRule.id}">
 						  	<div class="form-group">
-						    	<label class="control-label col-xs-2">产品编号 <font color="red">*</font></label>
-						    	<div class="col-xs-4"><input type="text" id="product_code" name="productRule.product_code" value="${productRule.product_code}" placeholder="如：10001" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_product_code" class="control-label validate_label" style="color: red;"></label></div>
-						  	</div>
-						  	<div class="form-group">
-						  		<label class="control-label col-xs-2">产品名称 <font color="red">*</font></label>
-						    	<div class="col-xs-4"><input type="text" id="product_name" name="productRule.product_name" value="${productRule.product_name}" placeholder="如：财富宝" class="form-control"/></div>
+						  		<label class="control-label col-xs-2">规则名称 <font color="red">*</font></label>
+						    	<div class="col-xs-4"><input type="text" id="rule_name" name="productRule.rule_name" value="${productRule.rule_name}" placeholder="如：通用规则" class="form-control"/></div>
 						    	<div class="col-xs-4"><label id="validate_product_name" class="control-label validate_label" style="color: red;"></label></div>
 						  	</div>
-						  	<div class="form-group">
-						  		<label class="control-label col-xs-2">产品额度 <font color="red">*</font></label>
-						    	<div class="col-xs-4"><input type="text" id="loan_amount" name="productRule.loan_amount" value="${productRule.loan_amount}" placeholder="如：30000" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_loan_amount" class="control-label validate_label" style="color: red;"></label></div>
-						  	</div>
-						  	<div class="form-group">
-						  		<label class="control-label col-xs-2">产品期限 <font color="red">*</font></label>
-						    	<div class="col-xs-2"><input type="text" id="loan_term" name="productRule.loan_term" value="${productRule.loan_term}" placeholder="如：180" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_loan_term" class="control-label validate_label" style="color: red;"></label></div>
+						   <div class="form-group">
+						  		<label class="control-label col-xs-2">借款人年龄 <font color="red">*</font></label>
+						    	<div class="col-xs-2"><input type="text" id="loan_age" name="productRule.loan_age" value="${productRule.loan_age}" placeholder="如：25" class="form-control"/></div>
+						    	<div class="col-xs-4"><label id="validate_loan_age" class="control-label validate_label" style="color: red;"></label></div>
 						  	</div>
 						  	<div class="form-group">
 						  		<label class="control-label col-xs-2">借款人职业 <font color="red">*</font></label>
@@ -66,6 +56,20 @@
 						    	</div>
 						    	<div class="col-xs-4"><label id="validate_loan_work" class="control-label validate_label" style="color: red;"></label></div>
 						     </div>
+						      <div class="form-group div1">
+						  		<label class="control-label col-xs-2">借款人工龄 <font color="red">*</font></label>
+						    	<div class="col-xs-2">
+						    	 <input type="text" id="loan_workyears" name="productRule.loan_workyears" value="${productRule.loan_workyears}" placeholder="如：3" class="form-control"/>
+						    	</div>
+						  	  </div>
+						  	  <div class="form-group div1 div3 ">
+						  		<label class="control-label col-xs-2">借款人月收入 <font color="red">*</font></label>
+						    	<div class="col-xs-2"><input type="text" id="loan_income" name="productRule.loan_income" value="${productRule.loan_income}" placeholder="如：3000.00" class="form-control"/></div>
+						  	  </div>
+						  	  <div class="form-group div2">
+						  		<label class="control-label col-xs-2">月均流水<font color="red">*</font></label>
+						    	<div class="col-xs-2"><input type="text" id="loan_bisincome" name="productRule.loan_bisincome" value="${productRule.loan_bisincome}" placeholder="如：3000.00" class="form-control"/></div>
+						  	  </div>
                              <div class="form-group">
 						        <label class="control-label col-xs-2">借款人房产 <font color="red">*</font></label>
                                 <div class="col-xs-4">
@@ -80,7 +84,45 @@
                                    </label>
 						    	</div>
  					         </div>
-					          
+					          <div class="form-group">
+						        <label class="control-label col-xs-2">逾期状况 <font color="red">*</font></label>
+                                <div class="col-xs-6">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_credit1" name="productRule.loan_credit" value="1"> 信用良好
+                                   </label>
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_credit2" name="productRule.loan_credit" value="2"> 1年内逾期少于3次或少于90天
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_credit3" name="productRule.loan_credit"  value="3"> 1年内逾期超过3次或超过90天
+                                   </label>
+						    	</div>
+ 					         </div>
+ 					         <div class="form-group">
+						        <label class="control-label col-xs-2">车辆状况 <font color="red">*</font></label>
+                                <div class="col-xs-4">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_car1" name="productRule.loan_car" value="1"> 有车
+                                   </label>
+                                   <label class="radio-inline">
+                                     <input type="checkbox" id="loan_car2" name="productRule.loan_car" value="2"> 无车
+                                   </label>
+						    	</div>
+ 					         </div>
+ 					          <div class="form-group">
+						        <label class="control-label col-xs-2">参保项目 <font color="red">*</font></label>
+                                <div class="col-xs-4">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_insurance1" name="productRule.loan_insurance" value="1"> 公积金
+                                   </label>
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_insurance2" name="productRule.loan_insurance" value="2"> 社保
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_insurance3" name="productRule.loan_insurance"  value="3"> 商业保险
+                                   </label>
+						    	</div>
+ 					         </div>
 			  				<button type="button" class="btn btn-default btn_loading" onclick="form_save();"><span class="glyphicon glyphicon-ok"></span> 保存</button>
 			  				<span class="img_loading" style="display: none;"><img src="/common/bin/img/loading.gif" /></span>
 			  				<button type="button" class="btn btn-default btn_loading" onclick="form_cancel();"><span class="glyphicon glyphicon-remove"></span> 取消</button>
@@ -98,27 +140,65 @@
     <script src="/common/layer/layer.js"></script>
   <script type="text/javascript">
    $(document).ready(function() {
+	   $(".div1").hide();
+	   $(".div2").hide();
+	   $(".div3").hide();
 		var works = "${productRule.loan_work}";
 		var houses = "${productRule.loan_house}";
-		var worksarr=works.split(",");  
+		var insurances = "${productRule.loan_insurance}";
+		var worksarr=works.split(","); 
 		var housesarr=houses.split(",");  
+		var insurancesarr=insurances.split(",");  
 		worksarr.forEach(function(e){ 
 			$("input[name='productRule.loan_work']:checkbox").each(function(){ 
 				var value = $(this).val();
 				if(e == value){
 					 $(this).prop('checked', true);
-				}  
-			});  
+					 
+				}
+			});
+			$(".div"+e).show();
 		});
+		
 		housesarr.forEach(function(e){ 
 			$("input[name='productRule.loan_house']:checkbox").each(function(){ 
 				var value = $(this).val();
 				if(e == value){
 					 $(this).prop('checked', true);
-				}  
-			});  
+				}
+			});
 		});
-	});
+		insurancesarr.forEach(function(e){ 
+			$("input[name='productRule.loan_insurance']:checkbox").each(function(){ 
+				var value = $(this).val();
+				if(e == value){
+					 $(this).prop('checked', true);
+				}  
+			});
+		});
+		var loancredit = "${productRule.loan_credit}";
+		var loancar = "${productRule.loan_car}";
+		var loancreditarr=loancredit.split(",");
+		var loancararr=loancar.split(",");
+		loancreditarr.forEach(function(e){
+			$(":checkbox[name='productRule.loan_credit'][value='" + e + "']").prop("checked", "checked");
+		});
+		loancararr.forEach(function(e){ 
+			$(":checkbox[name='productRule.loan_car'][value='" + e + "']").prop("checked", "checked");
+		});
+		
+		
+		//显示剩下字段
+        $(":checkbox[name='productRule.loan_work']").click(function(){
+        	var value = $(this).val();
+        	if($(this).is(':checked')) {
+            	$(".div"+value).show();
+        	} else {
+        		$(".div"+value).hide();
+        		$(".div"+value).children("div").children("input").val('')
+        	}
+        });
+    });
 	function form_cancel(){
 		window.location = '/productRule/productRuleList?keep=1';
 	}

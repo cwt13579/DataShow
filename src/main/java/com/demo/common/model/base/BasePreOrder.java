@@ -27,13 +27,13 @@ public abstract class BasePreOrder<M extends BasePreOrder<M>> extends Model<M> i
 		return get("order_time");
 	}
 
-	public M setOrderArea(java.lang.String orderArea) {
+	public M setOrderArea(java.lang.Long orderArea) {
 		set("order_area", orderArea);
 		return (M)this;
 	}
 	
-	public java.lang.String getOrderArea() {
-		return getStr("order_area");
+	public java.lang.Long getOrderArea() {
+		return getLong("order_area");
 	}
 
 	public M setOrderProduct(java.lang.Integer orderProduct) {

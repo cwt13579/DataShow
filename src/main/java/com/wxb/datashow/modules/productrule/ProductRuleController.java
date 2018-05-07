@@ -40,8 +40,14 @@ public class ProductRuleController extends BaseController {
     ProductRule productRule = getModel( ProductRule.class, "productRule" );
     String[] loanWorks = getParaValues("productRule.loan_work");
     String[] loanHouses = getParaValues("productRule.loan_house");
+    String[] loanInsurances = getParaValues("productRule.loan_insurance");
+    String[] credits = getParaValues("productRule.loan_credit");
+    String[] cars = getParaValues("productRule.loan_car");
     productRule.setLoanWork(StringUtils.join(loanWorks,","));
     productRule.setLoanHouse(StringUtils.join(loanHouses,","));
+    productRule.setLoanInsurance(StringUtils.join(loanInsurances,","));
+    productRule.setLoanCredit(StringUtils.join(credits,","));
+    productRule.setLoanCar(StringUtils.join(cars,","));
     productRule.save();
     renderJson( res );
   }
@@ -57,8 +63,14 @@ public class ProductRuleController extends BaseController {
     ProductRule productRule = getModel( ProductRule.class, "productRule" );
     String[] loanWorks = getParaValues("productRule.loan_work");
     String[] loanHouses = getParaValues("productRule.loan_house");
+    String[] loanInsurances = getParaValues("productRule.loan_insurance");
+    String[] credits = getParaValues("productRule.loan_credit");
+    String[] cars = getParaValues("productRule.loan_car");
     productRule.setLoanWork(StringUtils.join(loanWorks,","));
     productRule.setLoanHouse(StringUtils.join(loanHouses,","));
+    productRule.setLoanInsurance(StringUtils.join(loanInsurances,","));
+    productRule.setLoanCredit(StringUtils.join(credits,","));
+    productRule.setLoanCar(StringUtils.join(cars,","));
     productRule.update();
     renderJson( res );
   }

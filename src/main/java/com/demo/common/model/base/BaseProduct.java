@@ -54,49 +54,49 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends Model<M> imp
 		return get("product_limit");
 	}
 
-	public M setProductPeriod(java.lang.Integer productPeriod) {
+	public M setProductPeriod(java.lang.String productPeriod) {
 		set("product_period", productPeriod);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getProductPeriod() {
-		return getInt("product_period");
+	public java.lang.String getProductPeriod() {
+		return getStr("product_period");
 	}
 
-	public M setProductRate(java.math.BigDecimal productRate) {
-		set("product_rate", productRate);
+	public M setProductRateMin(java.math.BigDecimal productRateMin) {
+		set("product_rate_min", productRateMin);
 		return (M)this;
 	}
 	
-	public java.math.BigDecimal getProductRate() {
-		return get("product_rate");
+	public java.math.BigDecimal getProductRateMin() {
+		return get("product_rate_min");
 	}
 
-	public M setInterestWay(java.lang.Integer interestWay) {
+	public M setInterestWay(java.lang.String interestWay) {
 		set("interest_way", interestWay);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getInterestWay() {
-		return getInt("interest_way");
+	public java.lang.String getInterestWay() {
+		return getStr("interest_way");
 	}
 
-	public M setDrawWay(java.lang.Integer drawWay) {
+	public M setDrawWay(java.lang.String drawWay) {
 		set("draw_way", drawWay);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getDrawWay() {
-		return getInt("draw_way");
+	public java.lang.String getDrawWay() {
+		return getStr("draw_way");
 	}
 
-	public M setApplyWay(java.lang.Integer applyWay) {
+	public M setApplyWay(java.lang.String applyWay) {
 		set("apply_way", applyWay);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getApplyWay() {
-		return getInt("apply_way");
+	public java.lang.String getApplyWay() {
+		return getStr("apply_way");
 	}
 
 	public M setExclude(java.lang.String exclude) {
@@ -142,6 +142,42 @@ public abstract class BaseProduct<M extends BaseProduct<M>> extends Model<M> imp
 	
 	public java.lang.Integer getProductStatus() {
 		return getInt("product_status");
+	}
+
+	public M setBannerPath(java.lang.String bannerPath) {
+		set("banner_path", bannerPath);
+		return (M)this;
+	}
+	
+	public java.lang.String getBannerPath() {
+		return getStr("banner_path");
+	}
+
+	public M setProductRateMax(java.math.BigDecimal productRateMax) {
+		set("product_rate_max", productRateMax);
+		return (M)this;
+	}
+	
+	public java.math.BigDecimal getProductRateMax() {
+		return get("product_rate_max");
+	}
+
+	public M setPassRate(java.math.BigDecimal passRate) {
+		set("pass_rate", passRate);
+		return (M)this;
+	}
+	
+	public java.math.BigDecimal getPassRate() {
+		return get("pass_rate");
+	}
+
+	public M setServiceEarn(java.math.BigDecimal serviceEarn) {
+		set("service_earn", serviceEarn);
+		return (M)this;
+	}
+	
+	public java.math.BigDecimal getServiceEarn() {
+		return get("service_earn");
 	}
 
 }

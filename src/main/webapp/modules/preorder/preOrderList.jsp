@@ -9,8 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
- 
   </head>
   <body>
   <%@ include file="/modules/common/header.jsp"%>
@@ -19,18 +17,17 @@
 			<div class="col-xs-3">
 				<h4><span class="glyphicon glyphicon-th"></span> 预约列表</h4>
 			</div>
-			<div class="col-xs-9" style="text-align: right; padding-right: 0px;">
-				<button type="button" class="btn btn-default btn_loading" onclick="addPreOrder()"><span class="glyphicon glyphicon-plus"></span>新增</button>
-			</div>
+			 
 		</div>
 		<div class="row">
-				<div class="col-xs-12">
+				
 					<div class="panel panel-default">
 						<div class="panel-body" style="background-color: #eeeeee;">
+						<div class="col-xs-9">
 							<form id="search_form" method="post" class="form-inline">
 								<div class="form-group">
 									<label>预约编号</label> <input type="text" class="form-control"
-										id="productName" name="qm.product_name"></input>
+										id="productName" name="qm.id"></input>
 								</div>
 								<button type="button" class="btn btn-primary btn_loading"
 									onclick="getData(1);">
@@ -44,19 +41,26 @@
 								</button>
 							</form>
 						</div>
+						<div class="col-xs-3" style="text-align: right; padding-right: 0px;">
+				          <button type="button" class="btn btn-default btn_loading" onclick="exportPreOrder()"><span class="glyphicon glyphicon-download"></span>导出</button>
+			           </div>
 					</div>
 				</div>
+				
 			</div>
 	    <div class="row">
 			<div class="col-xs-12">
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" >
 						<thead>
 							<tr>
 								<th>预约编号</th>
 								<th>预约产品</th>
+								<th>客户名称</th>
+								<th>客户电话</th>
 								<th>预约时间</th>
 								<th>预约地区</th>
+								<th>是否处理</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -77,10 +81,19 @@
 		<tr>
             <td>{{item.id}}</td>
             <td>{{item.product_name}}</td>
+            <td>{{item.user_name}}</td>
+            <td>{{item.order_tel}}</td>
             <td>{{item.order_time}}</td>
-            <td>{{item.order_area}}</td>
+            <td>{{item.region_name}}</td>
             <td>
-                <a href="#" onclick="editPreOrder({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 处理</a>
+                 {{ if item.order_status == 0}}
+                    <span class="bg-warning">否</span>
+                 {{else}}
+                    <span class="bg-success">是</font></span>
+                 {{/if}}
+            </td>
+            <td>
+                <a href="#" onclick="handlePreOrder({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 处理</a>
 			</td>
 		</tr>
 		{{/each}}
@@ -141,31 +154,25 @@
 			});
 	      }
   
-    function addPreOrder() {
-    	window.location="/preOrder/preOrderAdd";
-    }
-    function editPreOrder(id) {
-    	window.location = '/preOrder/preOrderEdit?id=' + id;
-    }
-    function deletePreOrder(id) {
-    	layer.confirm('删除确认', '', function() {
+    function handlePreOrder(id) {
+    	layer.confirm('确认处理', '', function() {
     	  $.ajax({
-    		url:"/preOrder/preOrderDeleteInvoke?id=" + id,
+    		url:"/preOrder/preOrderHandleInvoke?id=" + id,
     		method : "post",
             beforeSend : function() {
     		},
     		success : function(data) {
     			if (data && data.code == 1) {
-    				layer.msg("删除成功",{time:1000},function(){
+    				layer.msg("处理成功",{time:1000},function(){
     					getData(1);
 					});
     				
     			} else {
-    				layer.msg("系统异常，删除失败",{time:1000});
+    				layer.msg("系统异常，处理失败",{time:1000});
     			}
     		},
     		error : function() {
-    			layer.msg("删除失败",{time:1000},function(){
+    			layer.msg("处理失败",{time:1000},function(){
 					getData(1);
 				});
     		}
@@ -175,6 +182,9 @@
     function clearCondition() {
         $("#productName").val('');
         getData(1);
+    }
+    function exportPreOrder(){
+    	window.location = "/preOrder/exportPreOrder";
     }
   </script>
 </html>

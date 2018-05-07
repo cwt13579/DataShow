@@ -19,17 +19,17 @@ public class PreOrder extends BasePreOrder<PreOrder> {
 	 public Page<PreOrder> getAllPreOrder(int current, int pageSize, Map<String, String> map) {
        List<Object> paramList = new ArrayList<Object>();
        StringBuilder condition = new StringBuilder();
-       String name = map.get("product_name");
+       Object id = map.get("id");
 
-       String from = "FROM  pre_order a where 1=1 ";
+       String from = "from pre_order a inner join region b on a.order_area = b.region_id left join product c on a.order_product = c.id  where 1=1 ";
        condition.append(from);
 
-       if (!StringUtils.isBlank(name)) {
-         condition.append(" and a.order_name like ?");
-         paramList.add("%" + name + "%");
+       if (id != null) {
+         condition.append(" and a.id like ?");
+         paramList.add("%" + id + "%");
        }
 
-       Page<PreOrder> page = paginate(current, pageSize, "SELECT * ", condition.toString(), paramList.toArray(new Object[] {}));
+       Page<PreOrder> page = paginate(current, pageSize, "SELECT a.*,b.region_name,c.product_name  ", condition.toString(), paramList.toArray(new Object[] {}));
 
        if (page != null && page.getList() != null) {
          if (current > 1 && page.getList().isEmpty()) {
@@ -38,4 +38,9 @@ public class PreOrder extends BasePreOrder<PreOrder> {
        }
        return page;
      }
+	 
+	 public List<PreOrder> getPreOrders() {
+		 String sql = "SELECT a.id,a.order_time,b.region_name,c.product_name  from pre_order a inner join region b on a.order_area = b.region_id left join product c on a.order_product = c.id order by a.id";
+		 return find(sql);
+	 }
 }

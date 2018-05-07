@@ -56,6 +56,27 @@
 			<version>3.3</version>
 		</dependency>
 		<dependency>
+          <groupId>com.jfinal</groupId>
+          <artifactId>jfinal-ext2</artifactId>
+          <version>2.0.8</version>
+        </dependency>
+            <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.15</version>
+      </dependency>
+    <dependency>
+        <groupId>org.lucee</groupId>
+        <artifactId>poi-ooxml-schemas</artifactId>
+        <version>3.15.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+            <version>3.15</version>
+    </dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
@@ -75,26 +96,13 @@
 			<artifactId>cos</artifactId>
 			<version>2017.5</version>
 		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>transport</artifactId>
-			<version>5.6.3</version>
-		</dependency>
+		 
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>x-pack-transport</artifactId>
-			<version>5.6.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.xpack</groupId>
-			<artifactId>x-pack</artifactId>
-			<version>5.6.3</version>
-		</dependency>
+		 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

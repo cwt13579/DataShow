@@ -2,6 +2,11 @@ jdbcUrl = jdbc:mysql://localhost:3306/jfinal_demo?characterEncoding=utf8&zeroDat
 user = root
 password = 1234
 devMode = true
+#jdbcUrl = jdbc:mysql://rm-2ze0agb15577433y6.mysql.rds.aliyuncs.com:1433/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+#user = root
+#password = z-b112358
+#devMode = true
+
 #阿里云OSS配置  内网地址 oss-cn-beijing-internal.aliyuncs.com
 endpoint = oss-cn-beijing.aliyuncs.com
 visitURI = https://zbpicture.oss-cn-beijing.aliyuncs.com

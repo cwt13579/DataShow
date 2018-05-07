@@ -44,5 +44,10 @@ public class Label extends BaseLabel<Label> {
 	 public List<Label> getAllLabel() {
 	      String sqlPara = "SELECT * FROM label";
 	      return find(sqlPara);
-	    }
+	 }
+	 
+	 public List<Label> getLabelByProductId(Object id) {
+		 String sqlPara = "SELECT * FROM label l inner join product_label pl on l.id=pl.label_id where pl.product_id=?";
+	     return find(sqlPara,new Object[]{id});
+	 }
 }

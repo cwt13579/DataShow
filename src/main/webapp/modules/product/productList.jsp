@@ -50,9 +50,10 @@
 	    <div class="row">
 			<div class="col-xs-12">
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover" style="table-layout:fixed">
 						<thead>
 							<tr>
+							    <th>产品logo</th>
 								<th>产品编号</th>
 								<th>产品名称</th>
 								<th>产品期限</th>
@@ -77,11 +78,12 @@
   <script id="listScript" type="text/html">
 		{{each list as item}}
 		<tr>
+             <td><img src={{item.logo_path}} height="50" width="50" /></td>
             <td>{{item.product_code}}</td>
             <td>{{item.product_name}}</td>
             <td>{{item.product_period}}</td>
             <td>{{item.product_limit}}</td>
-            <td>{{item.product_intro}}</td>
+            <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{item.product_intro}}</td>
             <td>{{item.institution}}</td>
             <td>
                 <a href="#" onclick="editProduct({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>

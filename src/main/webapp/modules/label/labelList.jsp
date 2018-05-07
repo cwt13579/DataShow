@@ -53,6 +53,7 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
+							    <th>标签图片</th>
 								<th>标签编号</th>
 								<th>标签名称</th>
 								<th>标签简介</th>
@@ -74,6 +75,7 @@
   <script id="listScript" type="text/html">
 		{{each list as item}}
 		<tr>
+            <td><img src={{item.label_path}} height="40" width="100" /></td>
             <td>{{item.label_code}}</td>
             <td>{{item.label_name}}</td>
             <td>{{item.remark}}</td>	

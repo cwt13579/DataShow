@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.common.model.Label;
 import com.demo.common.model.PreOrder;
 import com.demo.common.model.Product;
 import com.demo.common.model.ProductRule;
@@ -23,6 +24,10 @@ public class WXController extends BaseController {
     WsRes res = new WsRes();
     List<Product> resultList = Product.dao.getProductBy(getAllQueryMap());
     // 这里算法过滤 匹配规则
+    for(Product item : resultList) {
+    	List<Label> lableList = Label.dao.getLabelByProductId(item.getId());
+    	item.put("lableList", lableList);
+    }
     res.setData(resultList);
     renderJson(res);
   }
@@ -44,16 +49,18 @@ public class WXController extends BaseController {
    */
   public void submitOrder() {
     WsRes res = new WsRes();
-    String orderTel = getAttr("orderTel");
-    Integer orderProduct = getAttrForInt("orderProduct");
-    String orderArea = getAttr("orderArea");
+    String orderTel = getRequest().getParameter("orderTel");
+    String userName = getRequest().getParameter("userName");
+    String orderProduct = getRequest().getParameter("orderProduct");
+    String orderArea = getRequest().getParameter("orderArea");
 
     PreOrder preOrder = new PreOrder();
-    preOrder.setOrderArea(orderArea);
-    preOrder.setOrderProduct(orderProduct);
+    preOrder.setOrderArea(Long.valueOf(orderArea));
+    preOrder.setOrderProduct(Integer.valueOf(orderProduct));
     preOrder.setOrderTel(orderTel);
+    preOrder.setUserName(userName);
     preOrder.setOrderTime(new Date());
-
+    preOrder.setOrderStatus(0);
     preOrder.save();
     renderJson(res);
   }

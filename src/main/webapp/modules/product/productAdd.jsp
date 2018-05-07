@@ -50,34 +50,56 @@
 						  	</div>
 						  	<div class="form-group">
 						  		<label class="control-label col-xs-2">产品额度 <font color="red">*</font></label>
-						    	<div class="col-xs-2"><input type="text" id="loan_amount" name="product.product_limit" placeholder="如：30000" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_loan_amount" class="control-label validate_label" style="color: red;"></label></div>
+						    	<div class="form-inline">
+						    	 &nbsp;&nbsp;&nbsp;
+						    	   <input type="text" id="product_limit" name="product.product_limit" placeholder="如：30000" class="form-control"/>万元
+						    	</div>
 						  	</div>
 						  	<div class="form-group">
 						  		<label class="control-label col-xs-2">产品周期 <font color="red">*</font></label>
-						    	<div class="col-xs-2"><input type="text" id="loan_term" name="product.product_period" placeholder="如：180" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_loan_term" class="control-label validate_label" style="color: red;"></label></div>
+						    	<div class="col-xs-2"><select id="product_period" name="product.product_period"  class="form-control"  multiple="multiple"></select></div>
 						  	</div>
 						  	<div class="form-group">
 						  		<label class="control-label col-xs-2">产品月利率 <font color="red">*</font></label>
-						    	<div class="col-xs-2"><input type="text" id="product_rate" name="product.product_rate" placeholder="如：1-10" class="form-control"/></div>
-						    	<div class="col-xs-4"><label id="validate_loan_term" class="control-label validate_label" style="color: red;"></label></div>
+						    	<div class="form-inline" >
+						    	  &nbsp;&nbsp;&nbsp;
+						    	   <input type="text" id="product_rate_min" name="product.product_rate_min" value="${product.product_rate_min}" placeholder="如：1.2" class="form-control"/>%
+						    	   -
+						    	   <input type="text" id="product_rate_max" name="product.product_rate_max" value="${product.product_rate_max}" placeholder="如：2.2" class="form-control"/>%
+						    	</div>
 						  	</div>
-						  	
+						  	<div class="form-group">
+						  		<label class="control-label col-xs-2">通过率 <font color="red">*</font></label>
+						    	<div class="form-inline">
+						    	   &nbsp;&nbsp;&nbsp;<input type="text" id="pass_rate" name="product.pass_rate" value="${product.pass_rate}" placeholder="如：1.2" class="form-control"/>%
+						  	    </div>
+						  	</div>
+						  	<div class="form-group">
+						  		<label class="control-label col-xs-2">服务费收益 <font color="red">*</font></label>
+						    	<div class="form-inline">
+						    	   &nbsp;&nbsp;&nbsp;<input type="text" id="service_earn" name="product.service_earn" value="${product.service_earn}" placeholder="如：1.2" class="form-control"/>%
+						  	    </div>
+						  	</div>
 						  	<div class="form-group">
 						  		<label class="control-label col-xs-2">计息方式 <font color="red">*</font></label>
-						    	<div class="col-xs-4">
-						    	   <label class="radio-inline">
-                                     <input type="radio" id="interest_way1" name="product.interest_way" value="1"> 按日计息
+						    	<div class="col-xs-6">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way1" name="product.interest_way" value="1"> 等额本息
                                    </label>
-                                   <label class="radio-inline">
-                                     <input type="radio" id="interest_way2" name="product.interest_way" value="2"> 按月计息
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way2" name="product.interest_way" value="2"> 等额本金
                                    </label>
-                                    <label class="radio-inline">
-                                     <input type="radio" id="interest_way3" name="product.interest_way" value="3"> 到期还本
+                                    <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way3" name="product.interest_way" value="3"> 等本等金
                                    </label>
-                                    <label class="radio-inline">
-                                     <input type="radio" id="interest_way4" name="product.interest_way" value="4"> 随借随还
+                                    <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way4" name="product.interest_way" value="4"> 先息后本
+                                   </label>
+                                    <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way5" name="product.interest_way" value="5"> 先本后息
+                                   </label>
+                                    <label class="checkbox-inline">
+                                     <input type="checkbox" id="interest_way6" name="product.interest_way" value="6"> 差额还本
                                    </label>
 						    	</div>
 						    	<div class="col-xs-4"><label id="validate_interest_way" class="control-label validate_label" style="color: red;"></label></div>
@@ -85,31 +107,24 @@
                              <div class="form-group">
 						        <label class="control-label col-xs-2">放款方式 <font color="red">*</font></label>
                                 <div class="col-xs-4">
-						    	   <label class="radio-inline">
-                                     <input type="radio" id="draw_way1" name="product.draw_way" value="1"> 一次申请
-                                   </label>
-                                   <label class="radio-inline">
-                                     <input type="radio" id="draw_way2" name="product.draw_way" value="2"> 循环提款
-                                   </label>
-                                   <label class="radio-inline">
-                                      <input type="radio" id="draw_way3" name="product.draw_way"  value="3"> 随借随还
-                                   </label>
+						    	    <input type="text" id="draw_way" name="product.draw_way"  value="${product.draw_way}" placeholder="如：线下放款" class="form-control"/>
 						    	</div>
  					         </div>
-					         <div class="form-group">
+					        <div class="form-group">
 						        <label class="control-label col-xs-2">申请方式<font color="red">*</font></label>
-                                <div class="col-xs-4">
-						    	   <label class="radio-inline">
-                                     <input type="radio" id="apply_way1" name="product.apply_way" value="1"> 天天富App预约
-                                   </label>
-                                   <label class="radio-inline">
-                                     <input type="radio" id="apply_way2" name="product.apply_way" value="2"> 线下身份认证
-                                   </label>
-						    	</div>
+                                <div class="col-xs-4"><input type="text" id="apply_way" name="product.apply_way"  value="${product.apply_way}" placeholder="如：线下认证" class="form-control"/></div>
  					         </div> 
  					         <div class="form-group">
 						        <label class="control-label col-xs-2">支持地区 <font color="red">*</font></label>
 						        <div class="col-xs-4"><select name="productRegion.region_id" id="region_id" class="form-control" multiple="multiple" ></select></div>
+					         </div>
+					         <div class="form-group">
+						        <label class="control-label col-xs-2">支持规则 <font color="red">*</font></label>
+						    	<div class="col-xs-4"><select name="productRuleRelation.rule_id" id="rule_id" class="form-control"  ></select></div>
+					         </div>
+					         <div class="form-group">
+						        <label class="control-label col-xs-2">产品label <font color="red">*</font></label>
+						        <div class="col-xs-4"><select name="productLabel.label_id" id="label_id" class="form-control" multiple="multiple" ></select></div>
 					         </div>
 					         <div class="form-group">
 						  		<label class="control-label col-xs-2">产品logo <font color="red">*</font></label>
@@ -124,6 +139,10 @@
 						    	   <input type="file"  id="banner" name="banner" class="form-control file" />
 						    	   <input type="hidden"  id="banner_path" name="product.banner_path" value="${product.banner_path}" />
 						    	</div>
+						  	</div>
+						  	 <div class="form-group">
+						  		<label class="control-label col-xs-2">排他性 <font color="red">*</font></label>
+						    	<div class="col-xs-4"><input type="text" id="exclude" name="product.exclude"  value="${product.exclude}" placeholder="如：无排他性" class="form-control"/></div>
 						  	</div>
 			  				<button type="button" class="btn btn-default btn_loading" onclick="form_save();"><span class="glyphicon glyphicon-ok"></span> 保存</button>
 			  				<span class="img_loading" style="display: none;"><img src="/common/bin/img/loading.gif" /></span>
@@ -150,12 +169,14 @@
 	$(document).ready(function() {
 		$("#region_id").ui_select({schema:"Region",needDefault:false,selectedValue:[]});
 		$("#label_id").ui_select({schema:"Label",needDefault:false,selectedValue:[]});
+		$("#rule_id").ui_select({schema:"Rule",needDefault:false,selectedValue:[]});
+	    $("#product_period").ui_select({schema:"ProductPeriod",needDefault:false,selectedValue:[]});
 		$('#region_id').multiselect({
 			 nonSelectedText: '请选择',
 			    enableFiltering: true,
 	            includeSelectAllOption: true,
 	            maxHeight: 200,
-	            buttonWidth: '400px',
+	            buttonWidth: '380px',
 	            dropUp: true
         });
 		$('#label_id').multiselect({
@@ -163,9 +184,25 @@
 		    enableFiltering: true,
             includeSelectAllOption: true,
             maxHeight: 200,
-            buttonWidth: '400px',
+            buttonWidth: '380px',
             dropUp: true
        });
+		$('#rule_id').multiselect({
+		    nonSelectedText: '请选择',
+		    enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 200,
+            buttonWidth: '380px',
+            dropUp: true
+        });
+		$('#product_period').multiselect({
+		    nonSelectedText: '请选择',
+		    enableFiltering: true,
+           includeSelectAllOption: true,
+           maxHeight: 200,
+           buttonWidth: '380px',
+           dropUp: true
+      });
 		$("#logo").fileinput({
 	    	  language: 'zh', //设置语言
 		      uploadUrl: "/upload/uploadPicture?name=logo", //上传的地址

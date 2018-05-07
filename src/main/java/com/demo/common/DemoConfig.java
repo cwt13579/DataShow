@@ -1,5 +1,15 @@
 package com.demo.common;
 
+import com.demo.common.model.Finance;
+import com.demo.common.model.Label;
+import com.demo.common.model.PreOrder;
+import com.demo.common.model.Product;
+import com.demo.common.model.ProductLabel;
+import com.demo.common.model.ProductRegion;
+import com.demo.common.model.ProductRule;
+import com.demo.common.model.ProductRuleRelation;
+import com.demo.common.model.Region;
+import com.demo.common.model.SysDict;
 import com.demo.common.model._MappingKit;
 import com.demo.index.HelloController;
 import com.demo.index.IndexController;
@@ -95,6 +105,7 @@ public class DemoConfig extends JFinalConfig {
 	  ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
 	  me.add(arp);
 	  _MappingKit.mapping(arp);
+	  arp.addMapping("finance", "id", Finance.class);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {
@@ -105,7 +116,7 @@ public class DemoConfig extends JFinalConfig {
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
-		//me.add(new LoginInterceptor());
+		me.add(new LoginInterceptor());
 	}
 	
 	/**
