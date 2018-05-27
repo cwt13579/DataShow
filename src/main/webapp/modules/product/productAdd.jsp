@@ -140,6 +140,10 @@
 						    	   <input type="hidden"  id="banner_path" name="product.banner_path" value="${product.banner_path}" />
 						    	</div>
 						  	</div>
+						  	<div class="form-group">
+						        <label class="control-label col-xs-2">产品类型 <font color="red">*</font></label>
+						        <div class="col-xs-2"><select id="product_type" name="product.product_type"  class="form-control"></select></div>
+					         </div>
 						  	 <div class="form-group">
 						  		<label class="control-label col-xs-2">排他性 <font color="red">*</font></label>
 						    	<div class="col-xs-4"><input type="text" id="exclude" name="product.exclude"  value="${product.exclude}" placeholder="如：无排他性" class="form-control"/></div>
@@ -171,6 +175,7 @@
 		$("#label_id").ui_select({schema:"Label",needDefault:false,selectedValue:[]});
 		$("#rule_id").ui_select({schema:"Rule",needDefault:false,selectedValue:[]});
 	    $("#product_period").ui_select({schema:"ProductPeriod",needDefault:false,selectedValue:[]});
+	    $("#product_type").ui_select({schema:"ProductType",needDefault:false,selectedValue:[]});
 		$('#region_id').multiselect({
 			 nonSelectedText: '请选择',
 			    enableFiltering: true,

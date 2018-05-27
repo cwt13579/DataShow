@@ -19,13 +19,13 @@ public class Finance extends BaseFinance<Finance> {
 	 public Page<Finance> getAllFinance(int current, int pageSize, Map<String, String> map) {
 		    List<Object> paramList = new ArrayList<Object>();
 		    StringBuilder condition = new StringBuilder();
-		    String name = map.get("product_name");
+		    String name = map.get("finance_name");
 
-		    String from = "FROM  product a where 1=1 ";
+		    String from = "FROM  finance a where 1=1 ";
 		    condition.append(from);
 
 		    if (!StringUtils.isBlank(name)) {
-		      condition.append(" and a.product_name like ?");
+		      condition.append(" and a.finance_name like ?");
 		      paramList.add("%" + name + "%");
 		    }
 
@@ -40,4 +40,8 @@ public class Finance extends BaseFinance<Finance> {
 		    }
 		    return page;
 		  }
+	 
+	 public List<Finance> getFinanceList() {
+		 return find("select * from finance");
+	 }
 }

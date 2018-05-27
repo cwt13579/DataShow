@@ -58,13 +58,54 @@
 						     </div>
 						      <div class="form-group div1">
 						  		<label class="control-label col-xs-2">借款人工龄 <font color="red">*</font></label>
-						    	<div class="col-xs-2">
-						    	 <input type="text" id="loan_workyears" name="productRule.loan_workyears" value="${productRule.loan_workyears}" placeholder="如：3" class="form-control"/>
+						    	<div class="col-xs-6">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_workyears1" name="productRule.loan_workyears" value="1"> 6个月
+                                   </label>
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_workyears2" name="productRule.loan_workyears" value="2"> 1年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_workyears3" name="productRule.loan_workyears" value="3"> 2年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_workyears4" name="productRule.loan_workyears" value="4"> 3年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_workyears5" name="productRule.loan_workyears" value="5"> 3-5年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_workyears6" name="productRule.loan_workyears" value="6"> 5年以上
+                                   </label>
 						    	</div>
 						  	  </div>
 						  	  <div class="form-group div1 div3 ">
 						  		<label class="control-label col-xs-2">借款人月收入 <font color="red">*</font></label>
 						    	<div class="col-xs-2"><input type="text" id="loan_income" name="productRule.loan_income" value="${productRule.loan_income}" placeholder="如：3000.00" class="form-control"/></div>
+						  	  </div>
+						  	
+						  	   <div class="form-group div2">
+						  		<label class="control-label col-xs-2">经营年限 <font color="red">*</font></label>
+						    	<div class="col-xs-9">
+						    	   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_bisyears1" name="productRule.loan_bisyears" value="1"> 无执照
+                                   </label>
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_bisyears2" name="productRule.loan_bisyears" value="2"> 工商注册不满1年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_bisyears3" name="productRule.loan_bisyears" value="3"> 工商注册1年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_bisyears4" name="productRule.loan_bisyears" value="4"> 工商注册2年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_bisyears5" name="productRule.loan_bisyears" value="5"> 工商注册3-5年
+                                   </label>
+                                   <label class="checkbox-inline">
+                                      <input type="checkbox" id="loan_bisyears6" name="productRule.loan_bisyears" value="6"> 工商注册5年以上
+                                   </label>
+						    	</div>
 						  	  </div>
 						  	  <div class="form-group div2">
 						  		<label class="control-label col-xs-2">月均流水<font color="red">*</font></label>
@@ -73,6 +114,7 @@
                              <div class="form-group">
 						        <label class="control-label col-xs-2">借款人房产 <font color="red">*</font></label>
                                 <div class="col-xs-4">
+
 						    	   <label class="checkbox-inline">
                                      <input type="checkbox" id="loan_house1" name="productRule.loan_house" value="1"> 住宅
                                    </label>
@@ -81,6 +123,9 @@
                                    </label>
                                    <label class="checkbox-inline">
                                       <input type="checkbox" id="loan_house3" name="productRule.loan_house"  value="3"> 厂房
+                                   </label>
+                                   <label class="checkbox-inline">
+                                     <input type="checkbox" id="loan_house4" name="productRule.loan_house" value="4"> 无房产
                                    </label>
 						    	</div>
  					         </div>
@@ -154,10 +199,11 @@
 				var value = $(this).val();
 				if(e == value){
 					 $(this).prop('checked', true);
-					 
+					 $(".div"+e).show();
+
 				}
 			});
-			$(".div"+e).show();
+			
 		});
 		
 		housesarr.forEach(function(e){ 
@@ -178,15 +224,24 @@
 		});
 		var loancredit = "${productRule.loan_credit}";
 		var loancar = "${productRule.loan_car}";
+		var loanworkbisyears = "${productRule.loan_bisyears}";
+		var loanworkyears = "${productRule.loan_workyears}";
 		var loancreditarr=loancredit.split(",");
 		var loancararr=loancar.split(",");
+		var loanworkbisyearsarr=loanworkbisyears.split(",");
+		var loanworkyearsarr=loanworkyears.split(",");
 		loancreditarr.forEach(function(e){
 			$(":checkbox[name='productRule.loan_credit'][value='" + e + "']").prop("checked", "checked");
 		});
 		loancararr.forEach(function(e){ 
 			$(":checkbox[name='productRule.loan_car'][value='" + e + "']").prop("checked", "checked");
 		});
-		
+		loanworkbisyearsarr.forEach(function(e){ 
+			$(":checkbox[name='productRule.loan_bisyears'][value='" + e + "']").prop("checked", "checked");
+		});
+		loanworkyearsarr.forEach(function(e){ 
+			$(":checkbox[name='productRule.loan_workyears'][value='" + e + "']").prop("checked", "checked");
+		});
 		
 		//显示剩下字段
         $(":checkbox[name='productRule.loan_work']").click(function(){
@@ -196,6 +251,7 @@
         	} else {
         		$(".div"+value).hide();
         		$(".div"+value).children("div").children("input").val('')
+        		$(".div"+value).children("div").children("label").children("input[type='checkbox']").prop("checked", false);
         	}
         });
     });

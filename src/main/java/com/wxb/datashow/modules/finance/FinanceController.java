@@ -1,10 +1,5 @@
 package com.wxb.datashow.modules.finance;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.demo.common.model.Finance;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
@@ -51,7 +46,7 @@ public class FinanceController extends BaseController{
 	  public void financeEdit() throws Exception {
 	    String id = getPara("id");
 	    Finance finance = Finance.dao.findById(id);
-	     
+	    setAttr("finance",finance); 
 	    render("financeEdit.jsp");
 	  }
 
@@ -59,8 +54,6 @@ public class FinanceController extends BaseController{
 	    WsRes res = new WsRes();
 	    Finance finance = getModel(Finance.class, "finance");
 	    finance.update();
-
-	    
 	    renderJson(res);
 	  }
 

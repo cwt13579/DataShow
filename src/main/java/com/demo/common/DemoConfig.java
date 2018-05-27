@@ -1,16 +1,5 @@
 package com.demo.common;
 
-import com.demo.common.model.Finance;
-import com.demo.common.model.Label;
-import com.demo.common.model.PreOrder;
-import com.demo.common.model.Product;
-import com.demo.common.model.ProductLabel;
-import com.demo.common.model.ProductRegion;
-import com.demo.common.model.ProductRule;
-import com.demo.common.model.ProductRuleRelation;
-import com.demo.common.model.Region;
-import com.demo.common.model.SysDict;
-import com.demo.common.model._MappingKit;
 import com.demo.index.HelloController;
 import com.demo.index.IndexController;
 import com.demo.index.LoginController;
@@ -26,9 +15,17 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.wxb.datashow.modules.finance.FinanceController;
 import com.wxb.datashow.modules.label.LabelController;
+import com.wxb.datashow.modules.log.BizSysInfoController;
+import com.wxb.datashow.modules.log.FtpTaskController;
+import com.wxb.datashow.modules.log.LogCollectController;
+import com.wxb.datashow.modules.log.LogCollectMachineController;
+import com.wxb.datashow.modules.log.LogSourceFieldController;
+import com.wxb.datashow.modules.log.LogSourceInfoController;
 import com.wxb.datashow.modules.preorder.PreOrderController;
 import com.wxb.datashow.modules.product.ProductController;
+import com.wxb.datashow.modules.product.StatisticsRecordController;
 import com.wxb.datashow.modules.productrule.ProductRuleController;
 import com.wxb.datashow.modules.tsg.TsgController;
 import com.wxb.datashow.web.controller.EnumController;
@@ -90,6 +87,15 @@ public class DemoConfig extends JFinalConfig {
 		me.add("/preOrder", PreOrderController.class,"/modules/preorder");
 		me.add("/sysDict", SysDictController.class,"/modules/sysdict");
 		me.add("/label", LabelController.class,"/modules/label");
+		me.add("/finance", FinanceController.class,"/modules/finance");
+		me.add("/statisticsRecord", StatisticsRecordController.class,"/modules/statisticsrecord");
+		////////////////////////////////////////////////////////////////////
+		me.add("/log/bizsys", BizSysInfoController.class,"/modules/log/bizsysinfo");
+		me.add("/log/logcollect", LogCollectController.class,"/modules/log/logcollect");
+		me.add("/log/logCollectMachine", LogCollectMachineController.class,"/modules/log/logcollectmachine");
+		me.add("/log/logsourcefield", LogSourceFieldController.class,"/modules/log/logsourcefield");
+		me.add("/log/logsourceinfo", LogSourceInfoController.class,"/modules/log/logsourceinfo");
+		me.add("/log/ftpTask", FtpTaskController.class,"/modules/log/ftptask");
 	}
 	
 	public void configEngine(Engine me) {
@@ -104,8 +110,8 @@ public class DemoConfig extends JFinalConfig {
 	  me.add(dp);
 	  ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
 	  me.add(arp);
-	  _MappingKit.mapping(arp);
-	  arp.addMapping("finance", "id", Finance.class);
+	  com.demo.common.model._MappingKit.mapping(arp);
+	  //com.demo.common.model.log._MappingKit.mapping(arp);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {

@@ -57,7 +57,7 @@ public class LabelController extends BaseController{
     renderJson(res);
   }
 
-  public void LabelDeleteInvoke() {
+  public void labelDeleteInvoke() {
     WsRes res = new WsRes();
     String id = getPara("id");
     Label label = Label.dao.findById(id);

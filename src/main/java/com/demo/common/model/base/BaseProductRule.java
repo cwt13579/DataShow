@@ -72,13 +72,13 @@ public abstract class BaseProductRule<M extends BaseProductRule<M>> extends Mode
 		return get("loan_income");
 	}
 
-	public M setLoanWorkyears(java.lang.Integer loanWorkyears) {
+	public M setLoanWorkyears(java.lang.String loanWorkyears) {
 		set("loan_workyears", loanWorkyears);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getLoanWorkyears() {
-		return getInt("loan_workyears");
+	public java.lang.String getLoanWorkyears() {
+		return getStr("loan_workyears");
 	}
 
 	public M setLoanBisincome(java.math.BigDecimal loanBisincome) {
@@ -90,13 +90,13 @@ public abstract class BaseProductRule<M extends BaseProductRule<M>> extends Mode
 		return get("loan_bisincome");
 	}
 
-	public M setLoanBisyears(java.lang.Integer loanBisyears) {
+	public M setLoanBisyears(java.lang.String loanBisyears) {
 		set("loan_bisyears", loanBisyears);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getLoanBisyears() {
-		return getInt("loan_bisyears");
+	public java.lang.String getLoanBisyears() {
+		return getStr("loan_bisyears");
 	}
 
 	public M setLoanHouse(java.lang.String loanHouse) {
@@ -135,13 +135,13 @@ public abstract class BaseProductRule<M extends BaseProductRule<M>> extends Mode
 		return getStr("loan_credit");
 	}
 
-	public M setLoanAge(java.lang.String loanAge) {
+	public M setLoanAge(java.lang.Integer loanAge) {
 		set("loan_age", loanAge);
 		return (M)this;
 	}
 	
-	public java.lang.String getLoanAge() {
-		return getStr("loan_age");
+	public java.lang.Integer getLoanAge() {
+		return getInt("loan_age");
 	}
 
 	public M setRuleName(java.lang.String ruleName) {

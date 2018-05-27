@@ -40,7 +40,7 @@ public class PreOrder extends BasePreOrder<PreOrder> {
      }
 	 
 	 public List<PreOrder> getPreOrders() {
-		 String sql = "SELECT a.id,a.order_time,b.region_name,c.product_name  from pre_order a inner join region b on a.order_area = b.region_id left join product c on a.order_product = c.id order by a.id";
+		 String sql = "SELECT a.id,a.order_tel,a.user_name,a.order_time,b.region_name,c.product_name  from pre_order a inner join region b on a.order_area = b.region_id left join product c on a.order_product = c.id order by a.id";
 		 return find(sql);
 	 }
 }

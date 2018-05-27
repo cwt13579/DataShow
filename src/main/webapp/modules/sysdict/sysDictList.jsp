@@ -19,7 +19,9 @@
 			<div class="col-xs-3">
 				<h4><span class="glyphicon glyphicon-th"></span> 字典数据管理</h4>
 			</div>
- 
+            <div class="col-xs-9" style="text-align: right; padding-right: 0px;">
+				<button type="button" class="btn btn-default btn_loading" onclick="addSysDict()"><span class="glyphicon glyphicon-plus"></span>新增</button>
+			</div>
 		</div>
 		<div class="row">
 				<div class="col-xs-12">
@@ -80,8 +82,8 @@
             <td>{{item.data_name}}</td>
             <td>{{item.remark}}</td>
             <td>
-                <a href="#" onclick="editProduct({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>
-				<a href="#" onclick="deleteProduct({{item.id}})"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                <a href="#" onclick="editSysDict({{item.id}})"><span class="glyphicon glyphicon-edit"></span> 修改</a>
+				<a href="#" onclick="deleteSysDict({{item.id}})"><span class="glyphicon glyphicon-trash"></span> 删除</a>
 			</td>
 		</tr>
 		{{/each}}
@@ -91,7 +93,7 @@
   <script src="/common/bootstrap/js/bootstrap.min.js"></script>
   <script src="/common/tpl/template.js"></script>
   <script src="/common/p/p.js"></script>
-    <script src="/common/layer/layer.js"></script>
+  <script src="/common/layer/layer.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
 		getData(1);
@@ -142,16 +144,16 @@
 			});
 	      }
   
-    function addProduct() {
-    	window.location="/product/productAdd";
+    function addSysDict() {
+    	window.location="/sysDict/sysDictAdd";
     }
-    function editProduct(id) {
-    	window.location = '/product/productEdit?id=' + id;
+    function editSysDict(id) {
+    	window.location = '/sysDict/sysDictEdit?id=' + id;
     }
-    function deleteProduct(id) {
+    function deleteSysDict(id) {
     	layer.confirm('删除确认', '', function() {
     	  $.ajax({
-    		url:"/product/productDeleteInvoke?id=" + id,
+    		url:"/sysDict/sysDictDeleteInvoke?id=" + id,
     		method : "post",
             beforeSend : function() {
     		},

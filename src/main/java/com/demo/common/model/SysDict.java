@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.demo.common.model.base.BaseSysDict;
+import com.demo.common.model.log.base.BaseSysDict;
 import com.jfinal.plugin.activerecord.Page;
 
 /**
@@ -49,4 +49,9 @@ public class SysDict extends BaseSysDict<SysDict> {
       String sqlPara = "SELECT * FROM sys_dict WHERE status=1 and data_type=?";
       return find(sqlPara,new Object[]{dataType});
     }
+	
+	public SysDict findSysDictByValue(Object dataType,Object dataValue) {
+		String sqlPara = "SELECT * FROM sys_dict WHERE status=1 and data_type=? and data_value=?";
+	      return findFirst(sqlPara,new Object[]{dataType,dataValue});
+	}
 }

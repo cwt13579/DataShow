@@ -1,16 +1,24 @@
 package com.wxinterface.service;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.demo.common.model.Finance;
 import com.demo.common.model.Label;
 import com.demo.common.model.PreOrder;
 import com.demo.common.model.Product;
 import com.demo.common.model.ProductRule;
 import com.demo.common.model.Region;
+import com.demo.common.model.StatisticsRecord;
 import com.demo.common.model.SysDict;
 import com.wxb.datashow.common.BaseController;
 import com.wxb.datashow.common.WsRes;
@@ -23,11 +31,22 @@ public class WXController extends BaseController {
   public void getProductBy() {
     WsRes res = new WsRes();
     List<Product> resultList = Product.dao.getProductBy(getAllQueryMap());
-    // 这里算法过滤 匹配规则
+    
     for(Product item : resultList) {
+    	//添加label
     	List<Label> lableList = Label.dao.getLabelByProductId(item.getId());
     	item.put("lableList", lableList);
+    	 //添加interest_way_str
+    	String[] interestWays =  item.getInterestWay().split(",");
+    	List<String> interestWayStrs = new ArrayList<String>();
+    	for(String index : interestWays) {
+    		SysDict sysDict = SysDict.dao.findSysDictByValue("InterestWay",Integer.valueOf(index));
+    		interestWayStrs.add(sysDict.getDataName());
+    	}
+    	
+    	item.put("interest_way_str", StringUtils.join(interestWayStrs,","));
     }
+   
     res.setData(resultList);
     renderJson(res);
   }
@@ -43,7 +62,15 @@ public class WXController extends BaseController {
     res.setData(resultList);
     renderJson(res);
   }
-
+  /**
+   * 获取理财产品接口
+   */
+  public void getFinanceList() {
+	  WsRes res = new WsRes();
+	  List<Finance> resultList = Finance.dao.getFinanceList();
+	  res.setData(resultList);
+	  renderJson(res);
+  }
   /**
    * 预约
    */
@@ -65,6 +92,87 @@ public class WXController extends BaseController {
     renderJson(res);
   }
 
+  public void getTop10() {
+	  WsRes res = new WsRes();
+	  BigDecimal k1 = BigDecimal.valueOf(0.6);
+	  BigDecimal k2 = BigDecimal.valueOf(0.4);
+ 
+	  StatisticsRecord recommendCount = StatisticsRecord.dao.getMaxPersonRecommendCount();
+	  int standardRecommendedCount = recommendCount.getRecommendCount();
+	  List<StatisticsRecord> resultList = StatisticsRecord.dao.getStatisticsRecordList(k1,k2,standardRecommendedCount);
+
+	  //计算综合得分
+	  if(resultList != null && resultList.size() > 0) {
+		  for(StatisticsRecord item : resultList) { 
+			  item.put("score", item.getBigDecimal("score").setScale(2, BigDecimal.ROUND_UP));
+		  }
+	  }
+	  //根据综合评分排序
+	  Collections.sort(resultList, new Comparator<StatisticsRecord>() {
+		@Override
+		public int compare(StatisticsRecord o1, StatisticsRecord o2) {
+			return o2.getBigDecimal("score").compareTo(o1.getBigDecimal("score"));
+		}
+	  });
+	  res.setData(resultList);
+	  renderJson(res);
+  }
+  
+  public void getTop5InOrg() {
+	  WsRes res = new WsRes();
+	  String orgName = getRequest().getParameter("org_name");
+	  if(StringUtils.isBlank(orgName)) {
+		  res.setCode(WsRes.FAIL);
+		  res.setMsg("org_name is null");
+		  renderJson(res);
+	  }
+	  List<StatisticsRecord> resultList = StatisticsRecord.dao.getStatisticsRecordListByOrg(orgName);
+	  int standardRecommendedCount = StatisticsRecord.dao.getMaxPersonRecommendCount().getRecommendCount().intValue();
+	  BigDecimal k = BigDecimal.valueOf(0.5);
+	  BigDecimal percent = BigDecimal.valueOf(100);
+	  //计算综合得分
+	  if(resultList != null && resultList.size() > 0) {
+		  for(StatisticsRecord item : resultList) {
+			  BigDecimal v1 = BigDecimal.valueOf(item.getRecommendCount()).divide(BigDecimal.valueOf(standardRecommendedCount),2, BigDecimal.ROUND_HALF_EVEN);
+			  BigDecimal v2 = BigDecimal.valueOf(item.getDouble("transfer_rate"));
+			  BigDecimal value = v1.multiply(k).add( v2.multiply(k)).multiply(percent).setScale(2, BigDecimal.ROUND_UP);
+			  //DecimalFormat df = new DecimalFormat("0.00");  
+			  //String str = df.format(value);  
+			  item.put("score", value);
+		  }
+	  }
+	 //根据综合评分排序
+	  Collections.sort(resultList, new Comparator<StatisticsRecord>() {
+		@Override
+		public int compare(StatisticsRecord o1, StatisticsRecord o2) {
+			return o2.getBigDecimal("score").compareTo(o1.getBigDecimal("score"));
+		}
+	  });
+	  res.setData(resultList);
+	  renderJson(res);
+  }
+  
+  public void getAllOrg() {
+	  WsRes res = new WsRes();
+	  BigDecimal k4 = BigDecimal.valueOf(0.4);
+	  BigDecimal k3 = BigDecimal.valueOf(0.3);
+	  int standardRecommendedCount = StatisticsRecord.dao.getMaxPersonRecommendCountByOrg().getRecommendCount().intValue();
+	  List<StatisticsRecord> resultList = StatisticsRecord.dao.getOrgStatisticsRecordList(standardRecommendedCount,k3,k4);
+	  if(resultList != null && resultList.size() > 0) {
+		  for(StatisticsRecord item : resultList) {
+			  item.put("score", BigDecimal.valueOf(item.getDouble("score")).setScale(2, BigDecimal.ROUND_UP));
+		  }
+	  }
+	  //根据综合评分排序
+	  Collections.sort(resultList, new Comparator<StatisticsRecord>() {
+		@Override
+		public int compare(StatisticsRecord o1, StatisticsRecord o2) {
+			return o2.getBigDecimal("score").compareTo(o1.getBigDecimal("score"));
+		}
+	  });
+	  res.setData(resultList);
+	  renderJson(res);
+  }
   /**
    * 获取地区信息 
    */
@@ -100,4 +208,6 @@ public class WXController extends BaseController {
     res.setData(list);
     renderJson(res);
   }
+  
+
 }

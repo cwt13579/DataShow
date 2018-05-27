@@ -72,4 +72,22 @@ public abstract class BaseSysDict<M extends BaseSysDict<M>> extends Model<M> imp
 		return getStr("remark");
 	}
 
+	public M setExt1(java.lang.String ext1) {
+		set("ext1", ext1);
+		return (M)this;
+	}
+	
+	public java.lang.String getExt1() {
+		return getStr("ext1");
+	}
+
+	public M setExt2(java.lang.String ext2) {
+		set("ext2", ext2);
+		return (M)this;
+	}
+	
+	public java.lang.String getExt2() {
+		return getStr("ext2");
+	}
+
 }

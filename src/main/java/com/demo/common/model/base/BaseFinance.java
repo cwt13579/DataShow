@@ -36,6 +36,15 @@ public abstract class BaseFinance<M extends BaseFinance<M>> extends Model<M> imp
 		return getStr("finance_intro");
 	}
 
+	public M setFinanceCode(java.lang.String financeCode) {
+		set("finance_code", financeCode);
+		return (M)this;
+	}
+	
+	public java.lang.String getFinanceCode() {
+		return getStr("finance_code");
+	}
+
 	public M setRemark(java.lang.String remark) {
 		set("remark", remark);
 		return (M)this;
@@ -52,6 +61,15 @@ public abstract class BaseFinance<M extends BaseFinance<M>> extends Model<M> imp
 	
 	public java.math.BigDecimal getWeekInterest() {
 		return get("week_interest");
+	}
+
+	public M setWeekInterest2(java.math.BigDecimal weekInterest2) {
+		set("week_interest2", weekInterest2);
+		return (M)this;
+	}
+	
+	public java.math.BigDecimal getWeekInterest2() {
+		return get("week_interest2");
 	}
 
 	public M setInvestMin(java.math.BigDecimal investMin) {
@@ -117,13 +135,13 @@ public abstract class BaseFinance<M extends BaseFinance<M>> extends Model<M> imp
 		return getStr("relate_product");
 	}
 
-	public M setBackWay(java.lang.Long backWay) {
+	public M setBackWay(java.lang.String backWay) {
 		set("back_way", backWay);
 		return (M)this;
 	}
 	
-	public java.lang.Long getBackWay() {
-		return getLong("back_way");
+	public java.lang.String getBackWay() {
+		return getStr("back_way");
 	}
 
 	public M setExt1(java.lang.String ext1) {

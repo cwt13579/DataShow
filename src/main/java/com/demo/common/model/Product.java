@@ -1,9 +1,13 @@
 package com.demo.common.model;
 
-import com.demo.common.model.base.*;
-import com.jfinal.plugin.activerecord.*;
-import org.apache.commons.lang3.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.demo.common.model.base.BaseProduct;
+import com.jfinal.plugin.activerecord.Page;
 
 public class Product extends BaseProduct<Product>
 {
@@ -74,11 +78,33 @@ public class Product extends BaseProduct<Product>
             condition.append(" and FIND_IN_SET( ? , b.loan_credit)");
             paramList.add(map.get("loan_credit")[0]);
         }
+        if (!StringUtils.isAllBlank((CharSequence[])map.get("loan_bisyears"))) {
+            condition.append(" and FIND_IN_SET( ? , b.loan_bisyears)");
+            paramList.add(map.get("loan_bisyears")[0]);
+        }
         if (!StringUtils.isAllBlank((CharSequence[])map.get("loan_bisincome"))) {
             condition.append(" and b.loan_bisincome <= ?");
             paramList.add(map.get("loan_bisincome")[0]);
         }
         
+        if (!StringUtils.isAllBlank((CharSequence[])map.get("loan_insurance"))) {
+        	System.out.println((String[])map.get("loan_insurance"));
+            condition.append(" and (  ");
+            int count=0;
+            for(String insuranceItem : (String[])map.get("loan_insurance")) {
+            	System.out.println("insuranceItem="+insuranceItem);
+            	if(count==0) {
+            		condition.append("  FIND_IN_SET( ? , b.loan_insurance)");
+                	paramList.add(insuranceItem);
+            	} else {
+            		condition.append(" or FIND_IN_SET( ? , b.loan_insurance)");
+                	paramList.add(insuranceItem);
+            	}
+            	count++;
+            }
+            condition.append("  ) ");
+            
+        }
         return (List<Product>)this.find(from + condition.toString(), paramList.toArray(new Object[0]));
     }
     
