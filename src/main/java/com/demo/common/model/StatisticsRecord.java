@@ -68,7 +68,7 @@ public class StatisticsRecord extends BaseStatisticsRecord<StatisticsRecord> {
 		 return find(sql,new Object[]{maxRecommedCount,k1,k2,monthFirstDay,monthLastDay});
 	 }
 	 
-	 public List<StatisticsRecord> getStatisticsRecordListByOrg(String orgName) {
+	 public List<StatisticsRecord> getStatisticsRecordListByOrg(BigDecimal k1,BigDecimal k2,Integer maxRecommedCount,String orgCode) {
 		 Calendar cal = Calendar.getInstance();
 		 cal.setTime(new Date());
 		 int month = cal.get(Calendar.MONTH)+1;
@@ -77,14 +77,15 @@ public class StatisticsRecord extends BaseStatisticsRecord<StatisticsRecord> {
 		 String monthLastDay = year+"-"+month+"-"+"31";
 		 String sql = "SELECT * FROM ("
 		 		+ " SELECT a.user_account,a.user_name,a.org_name,SUM(a.recommend_count) recommend_count,SUM(a.apply_count) apply_count,SUM(a.apply_count)/SUM(a.recommend_count) transfer_rate,"
+		 		+ " ((SUM(a.recommend_count)/?)*?+(SUM(a.apply_count)/SUM(a.recommend_count))*?)*100 score "
 		 		+ " from statistics_record a "
 		 		+ " where a.date BETWEEN ? AND ? "
-		 		+ " and a.org_name=? "
+		 		+ " and a.org_code=? "
 		 		+ "GROUP BY a.user_account,a.user_name,a.org_code,a.org_name"
 		 		+ ") temp "
 		 		+ " order BY temp.recommend_count DESC ,temp.transfer_rate DESC "
-		 		+ " limit 0,5";
-		 return find(sql,new Object[]{monthFirstDay,monthLastDay,orgName});
+		 		+ " limit 0,10";
+		 return find(sql,new Object[]{maxRecommedCount,k1, k2,monthFirstDay,monthLastDay,orgCode});
 	 }
 	 
 	 public List<StatisticsRecord> getOrgStatisticsRecordList(Integer standardRecommendedCount,BigDecimal k3,BigDecimal k4) {
@@ -96,13 +97,13 @@ public class StatisticsRecord extends BaseStatisticsRecord<StatisticsRecord> {
 		 String monthLastDay = year+"-"+month+"-"+"31";
 		 String sql = "SELECT * FROM ("
 		 		+ " SELECT a.org_code,a.org_name,SUM(a.recommend_count) recommend_count,SUM(a.apply_count) apply_count,SUM(a.apply_count)/SUM(a.recommend_count) transfer_rate,COUNT(a.user_account) userCount,b.remark,COUNT(a.user_account)/b.remark use_rate,b.ext1/b.remark open_rate, "
-		 		+ "((SUM(a.recommend_count)/?)*?+(SUM(a.apply_count)/SUM(a.recommend_count))*?+(COUNT(a.user_account)/b.remark)*?)*100 score "
+		 		+ "((SUM(a.recommend_count)/?)*?+(SUM(a.apply_count)/SUM(a.recommend_count))*?+(b.ext1/b.remark)*?)*100 score "
 		 		+ " FROM statistics_record a ,sys_dict b "
 		 		+ " WHERE   a.org_code=b.data_value "
 		 		+ " AND b.data_type='Org' "
 		 		+ " AND a.date BETWEEN ? AND ? "
 		 		+ " GROUP BY a.org_code,a.org_name ) temp  "
 		 		+ " ORDER BY temp.score DESC,temp.recommend_count DESC ";
-		 return find(sql,new Object[]{standardRecommendedCount,k3,k4,k3,monthFirstDay,monthLastDay});
+		 return find(sql,new Object[]{standardRecommendedCount,k3,k3,k4,monthFirstDay,monthLastDay});
 	 }
 }

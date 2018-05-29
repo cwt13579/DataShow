@@ -33,6 +33,7 @@ var path = '${path}';
 	        	   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span >统计管理</span></a>
 	        	   <ul class="dropdown-menu">
 						<li><a href="/statisticsRecord">统计数据录入管理</a></li>
+						<li><a href="/statisticsRecord/orgIndex">机构管理</a></li>
 					</ul> 
 	        	</li>
 	  </ul>
@@ -41,6 +42,14 @@ var path = '${path}';
 	        	   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span >基础管理</span></a>
 	        	   <ul class="dropdown-menu">
 						<li><a href="/sysDict">字典数据管理</a></li>
+					</ul> 
+	        	</li>
+	  </ul>
+	   <ul class="nav navbar-nav">
+	        	<li class="dropdown">
+	        	   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span >es查询</span></a>
+	        	   <ul class="dropdown-menu">
+						<li><a href="/getLibInOutList">图书馆记录查询</a></li>
 					</ul> 
 	        	</li>
 	  </ul>

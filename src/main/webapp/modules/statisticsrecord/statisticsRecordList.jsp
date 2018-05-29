@@ -48,6 +48,7 @@
 						<div class="col-xs-3" style="text-align: right; padding-right: 0px;">
 						  <a class="btn btn-default btn_loading" href="/template/sr.xls"><span  class="glyphicon glyphicon-download">导入模板</span></a>
 			              <button class="btn btn-default btn_loading" data-toggle="modal" data-target="#stasticsUploadModel"><span class="glyphicon glyphicon-upload"></span>导入</button>
+			              <button class="btn btn-default btn_loading" data-toggle="modal" data-target="#orgUploadModel"><span class="glyphicon glyphicon-upload"></span>导入机构</button>
 			           </div>
 					</div>
 				</div>
@@ -97,6 +98,7 @@
 		{{/each}}
 	</script>
 	<%@ include file="/modules/statisticsrecord/statisticsUploadModel.jsp"%>
+
 </body>
   <script src="/common/js/jquery-1.10.2.min.js"></script>
   <script src="/common/bootstrap/js/bootstrap.min.js"></script>
@@ -113,6 +115,7 @@
     function importTemplate() {
     	window.location="/statisticsRecord/importTemplate"
     }
+    
     function uploadFile() {
     	var formobj =  document.getElementById("importFile");
     	var formdata = new FormData(formobj);

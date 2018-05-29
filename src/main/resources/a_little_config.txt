@@ -1,12 +1,12 @@
 #jfinal_demo collect
-jdbcUrl = jdbc:mysql://localhost:3306/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-user = root
-password = 1234
-devMode = true
-#jdbcUrl = jdbc:mysql://rm-uf65ej0u1a52elwoz2o.mysql.rds.aliyuncs.com:3306/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+#jdbcUrl = jdbc:mysql://localhost:3306/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
 #user = root
-#password = zb-112358
+#password = 1234
 #devMode = true
+jdbcUrl = jdbc:mysql://rm-uf65ej0u1a52elwoz2o.mysql.rds.aliyuncs.com:3306/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password = zb-112358
+devMode = true
 
 #阿里云OSS配置  内网地址 oss-cn-beijing-internal.aliyuncs.com
 endpoint = oss-cn-beijing.aliyuncs.com

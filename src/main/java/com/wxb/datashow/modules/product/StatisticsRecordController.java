@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import com.demo.common.model.StatisticsRecord;
+import com.demo.common.model.SysDict;
 import com.demo.utils.fileupload.PoiExt;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
@@ -89,7 +90,40 @@ public class StatisticsRecordController extends BaseController {
 		 redirect("/statisticsRecord");
 	}
 	
+	public void importOrgRecord()  {
+		 WsRes res = new WsRes();
+		 UploadFile uf = getFile("orgExcelUpload", "uploads");
+		 File uploadFile = uf.getFile();
+		 try {
+			 PoiExt.ReadExcel(uploadFile, "update sys_dict set remark=?,ext1=? where data_type='Org' and data_value=?", 3);
+
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 //render("statisticsRecordList.jsp");
+		 redirect("/statisticsRecord/orgIndex");
+	}
+	
 	public void importTemplate() {
 		renderFile(new File(""));
+	}
+	
+	public void orgIndex() {
+		render("orgList.jsp");
+	}
+	
+	public void orgListInvoke() {
+		WsRes res = new WsRes();
+	    Page<SysDict> page = SysDict.dao.getAllSysDict(getPageCurrent(), getPageSize(), getQueryMap());
+	 
+	    if (page != null) {
+	      res.setCode(WsRes.SUCCESS);
+	      res.setData(page);
+	      res.setMsg("成功");
+	    } else {
+	      res.setCode(WsRes.FAIL);
+	      res.setMsg("失败");
+	    }
+	    renderJson(res);
 	}
 }

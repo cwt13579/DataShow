@@ -1,7 +1,6 @@
 package com.wxinterface.service;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -120,25 +119,29 @@ public class WXController extends BaseController {
   
   public void getTop5InOrg() {
 	  WsRes res = new WsRes();
-	  String orgName = getRequest().getParameter("org_name");
-	  if(StringUtils.isBlank(orgName)) {
+	  String orgCode = getRequest().getParameter("org_code");
+	  if(StringUtils.isBlank(orgCode)) {
 		  res.setCode(WsRes.FAIL);
-		  res.setMsg("org_name is null");
+		  res.setMsg("org_code is null");
 		  renderJson(res);
+		  return;
 	  }
-	  List<StatisticsRecord> resultList = StatisticsRecord.dao.getStatisticsRecordListByOrg(orgName);
+	  BigDecimal k1 = BigDecimal.valueOf(0.6);
+	  BigDecimal k2 = BigDecimal.valueOf(0.4);
 	  int standardRecommendedCount = StatisticsRecord.dao.getMaxPersonRecommendCount().getRecommendCount().intValue();
-	  BigDecimal k = BigDecimal.valueOf(0.5);
-	  BigDecimal percent = BigDecimal.valueOf(100);
+	  List<StatisticsRecord> resultList = StatisticsRecord.dao.getStatisticsRecordListByOrg(k1,k2,standardRecommendedCount,orgCode);
+	  
+	  
+	  //BigDecimal percent = BigDecimal.valueOf(100);
 	  //计算综合得分
 	  if(resultList != null && resultList.size() > 0) {
 		  for(StatisticsRecord item : resultList) {
-			  BigDecimal v1 = BigDecimal.valueOf(item.getRecommendCount()).divide(BigDecimal.valueOf(standardRecommendedCount),2, BigDecimal.ROUND_HALF_EVEN);
-			  BigDecimal v2 = BigDecimal.valueOf(item.getDouble("transfer_rate"));
-			  BigDecimal value = v1.multiply(k).add( v2.multiply(k)).multiply(percent).setScale(2, BigDecimal.ROUND_UP);
+			  //BigDecimal v1 = BigDecimal.valueOf(item.getRecommendCount()).divide(BigDecimal.valueOf(standardRecommendedCount),2, BigDecimal.ROUND_HALF_EVEN);
+			  //BigDecimal v2 = BigDecimal.valueOf(item.getDouble("transfer_rate"));
+			  //BigDecimal value = v1.multiply(k).add( v2.multiply(k)).multiply(percent).setScale(2, BigDecimal.ROUND_UP);
 			  //DecimalFormat df = new DecimalFormat("0.00");  
 			  //String str = df.format(value);  
-			  item.put("score", value);
+			  item.put("score", item.getBigDecimal("score").setScale(2, BigDecimal.ROUND_UP));
 		  }
 	  }
 	 //根据综合评分排序
